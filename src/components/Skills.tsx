@@ -122,42 +122,26 @@ const Skills = () => {
           {skillCategories.map((category, categoryIndex) => (
             <Card 
               key={categoryIndex} 
-              className="glass-card border-primary/20 hover:glow-primary transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 group relative overflow-hidden"
-              style={{
-                animation: `fadeInUp 0.6s ease-out ${categoryIndex * 0.15}s both`
-              }}
+              className="glass-card border-primary/20 hover:border-primary/40 transition-all duration-200 group"
             >
-              {/* Animated background gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              {/* Shine effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-              
               <CardHeader>
-                <CardTitle className="text-xl text-primary group-hover:scale-105 transition-transform duration-300 transform-gpu relative z-10">{category.title}</CardTitle>
+                <CardTitle className="text-xl text-primary">{category.title}</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4 relative z-10">
+              <CardContent className="space-y-4">
                 {category.skills.map((skill, skillIndex) => (
                   <div 
                     key={skillIndex} 
-                    className="space-y-2 group/skill hover:translate-x-2 transition-transform duration-300"
-                    style={{
-                      animation: `slideInLeft 0.5s ease-out ${skillIndex * 0.1}s both`
-                    }}
+                    className="space-y-2"
                   >
                     <div className="flex justify-between items-center">
-                      <span className="font-medium group-hover/skill:text-primary transition-colors duration-300">{skill.name}</span>
-                      <span className="text-sm text-muted-foreground group-hover/skill:text-primary transition-colors duration-300 font-bold">{skill.level}%</span>
+                      <span className="font-medium">{skill.name}</span>
+                      <span className="text-sm text-muted-foreground font-bold">{skill.level}%</span>
                     </div>
                     <div className="relative">
                       <Progress 
                         value={skill.level} 
-                        className="h-2 group-hover/skill:h-3 transition-all duration-300"
+                        className="h-2"
                       />
-                      {/* Animated glow effect on hover */}
-                      <div 
-                        className="absolute inset-0 bg-gradient-to-r from-primary/50 to-accent/50 opacity-0 group-hover/skill:opacity-50 blur-sm transition-opacity duration-300 rounded-full"
-                        style={{ width: `${skill.level}%` }}
-                      ></div>
                     </div>
                   </div>
                 ))}
@@ -167,37 +151,25 @@ const Skills = () => {
         </div>
 
         {/* Certifications */}
-        <Card className="glass-card border-primary/20 hover:glow-primary transition-all duration-500 relative overflow-hidden group">
-          {/* Animated background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          
+        <Card className="glass-card border-primary/20 hover:border-primary/40 transition-all duration-200 group">
           <CardHeader>
-            <CardTitle className="text-2xl text-center text-gradient group-hover:scale-105 transition-transform duration-300 relative z-10">Certifications</CardTitle>
+            <CardTitle className="text-2xl text-center text-gradient">Certifications</CardTitle>
           </CardHeader>
-          <CardContent className="relative z-10">
+          <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {certifications.map((cert, index) => (
                 <div 
                   key={index}
-                  className="p-4 rounded-lg bg-secondary/30 hover:bg-gradient-to-br hover:from-primary/10 hover:to-accent/10 transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:rotate-1 cursor-pointer border border-transparent hover:border-primary/30 hover:shadow-xl hover:shadow-primary/20 group/cert relative overflow-hidden"
-                  style={{
-                    animation: `fadeInScale 0.5s ease-out ${index * 0.1}s both`
-                  }}
+                  className="p-4 rounded-lg bg-secondary/30 hover:bg-primary/10 transition-all duration-200 cursor-pointer border border-transparent hover:border-primary/30"
                 >
-                  {/* Shine effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/cert:translate-x-full transition-transform duration-700"></div>
-                  
                   <div className="flex justify-between items-start mb-2">
-                    <Badge className={`${getCertificationColor(cert.type)} group-hover/cert:scale-110 transition-transform duration-300`}>
+                    <Badge className={`${getCertificationColor(cert.type)}`}>
                       {cert.type}
                     </Badge>
-                    <span className="text-xs text-muted-foreground group-hover/cert:text-primary transition-colors duration-300 font-semibold">{cert.date}</span>
+                    <span className="text-xs text-muted-foreground font-semibold">{cert.date}</span>
                   </div>
-                  <h4 className="font-semibold text-sm mb-1 leading-tight group-hover/cert:text-primary transition-colors duration-300">{cert.title}</h4>
-                  <p className="text-xs text-muted-foreground group-hover/cert:text-foreground transition-colors duration-300">{cert.organization}</p>
-                  
-                  {/* Corner accent */}
-                  <div className="absolute top-0 right-0 w-0 h-0 border-t-[20px] border-r-[20px] border-t-primary/0 border-r-transparent group-hover/cert:border-t-primary/20 transition-all duration-300"></div>
+                  <h4 className="font-semibold text-sm mb-1 leading-tight">{cert.title}</h4>
+                  <p className="text-xs text-muted-foreground">{cert.organization}</p>
                 </div>
               ))}
             </div>

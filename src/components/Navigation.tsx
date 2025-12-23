@@ -1,10 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Home, User, Code, GraduationCap, Mail, Bot } from "lucide-react";
 
-const Navigation = () => {
+interface NavigationProps {
+  activePage: string;
+  onPageChange: (pageId: string) => void;
+}
+
+const Navigation = ({ activePage, onPageChange }: NavigationProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("hero");
 
   const navItems = [
     { id: "hero", label: "Home", icon: <Home className="h-4 w-4" /> },
@@ -16,35 +20,10 @@ const Navigation = () => {
     { id: "contact", label: "Contact", icon: <Mail className="h-4 w-4" /> }
   ];
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+  const handleNavClick = (pageId: string) => {
+    onPageChange(pageId);
     setIsOpen(false);
   };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = navItems.map(item => document.getElementById(item.id)).filter(Boolean);
-      const scrollPosition = window.scrollY + 100;
-
-      for (const section of sections) {
-        if (section) {
-          const offsetTop = section.offsetTop;
-          const offsetBottom = offsetTop + section.offsetHeight;
-
-          if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
-            setActiveSection(section.id);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <>
@@ -53,7 +32,7 @@ const Navigation = () => {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 cursor-pointer transition-all duration-200" onClick={() => handleNavClick("hero")}>
               <div className="w-10 h-10 rounded-full hero-gradient flex items-center justify-center text-white font-bold">
                 DB
               </div>
@@ -67,10 +46,10 @@ const Navigation = () => {
                   key={item.id}
                   variant="ghost"
                   size="sm"
-                  onClick={() => scrollToSection(item.id)}
-                  className={`flex items-center gap-2 transition-all duration-300 ${
-                    activeSection === item.id
-                      ? "bg-primary/20 text-primary glow-primary"
+                  onClick={() => handleNavClick(item.id)}
+                  className={`flex items-center gap-2 transition-all duration-200 ${
+                    activePage === item.id
+                      ? "bg-primary/20 text-primary"
                       : "hover:bg-primary/10 hover:text-primary"
                   }`}
                 >
@@ -81,7 +60,7 @@ const Navigation = () => {
 
               {/* Buy Project CTA */}
               <a
-                href="https://core-innovation-ch.vercel.app/"
+                href="https://dd-products.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="ml-2"
@@ -117,9 +96,9 @@ const Navigation = () => {
                     key={item.id}
                     variant="ghost"
                     size="sm"
-                    onClick={() => scrollToSection(item.id)}
-                    className={`flex items-center gap-2 justify-start transition-all duration-300 ${
-                      activeSection === item.id
+                    onClick={() => handleNavClick(item.id)}
+                    className={`flex items-center gap-2 justify-start transition-all duration-200 ${
+                      activePage === item.id
                         ? "bg-primary/20 text-primary"
                         : "hover:bg-primary/10 hover:text-primary"
                     }`}
@@ -131,7 +110,7 @@ const Navigation = () => {
 
                 {/* Mobile Buy CTA */}
                 <a
-                  href="https://core-innovation-ch.vercel.app/"
+                  href="https://dd-products.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsOpen(false)}

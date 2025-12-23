@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -13,7 +13,8 @@ import {
   Minimize2, 
   Maximize2,
   Sparkles,
-  Zap
+  Zap,
+  Move
 } from "lucide-react";
 import { PersonalInfoHelper } from "@/data/personalInfo";
 
@@ -24,19 +25,28 @@ interface Message {
   timestamp: Date;
 }
 
+interface Position {
+  x: number;
+  y: number;
+}
+
 const FloatingChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      text: "Woof! 🐾 I'm Durai's friendly AI pet assistant! I know all about my human's skills, projects, and experience. Ask me anything - I love to chat! What's your name? 😊",
+      text: "Hello! I'm Durai's AI assistant. I can provide information about his professional background, technical skills, and project portfolio. How may I assist you today?",
       sender: "bot",
       timestamp: new Date()
     }
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [position, setPosition] = useState<Position>({ x: window.innerWidth - 120, y: window.innerHeight - 120 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const widgetRef = useRef<HTMLDivElement>(null);
 
   const quickResponses = {
     "contact": "📧 Email: duraib@gmail.com\n📱 Phone: +91 8770 6343\n\nHe's available for freelance work and collaborations!",
@@ -103,6 +113,57 @@ const FloatingChatWidget = () => {
     }
   };
 
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+    
+    const rect = widgetRef.current?.getBoundingClientRect();
+    if (rect) {
+      setDragOffset({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      });
+    }
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging) return;
+      
+      const widgetWidth = widgetRef.current?.offsetWidth || (isOpen ? 320 : 64);
+      const widgetHeight = widgetRef.current?.offsetHeight || (isOpen ? (isMinimized ? 64 : 384) : 64);
+      
+      // Calculate new position based on cursor
+      let newX = e.clientX - dragOffset.x;
+      let newY = e.clientY - dragOffset.y;
+      
+      // Keep widget within viewport bounds
+      newX = Math.max(0, Math.min(newX, window.innerWidth - widgetWidth));
+      newY = Math.max(0, Math.min(newY, window.innerHeight - widgetHeight));
+      
+      setPosition({ x: newX, y: newY });
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+      document.body.style.userSelect = 'none';
+    } else {
+      document.body.style.userSelect = '';
+    }
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.body.style.userSelect = '';
+    };
+  }, [isDragging, dragOffset, isOpen, isMinimized]);
+
   const quickQuestions = [
     "How old is Durai?",
     "What are his skills?", 
@@ -120,98 +181,72 @@ const FloatingChatWidget = () => {
 
   if (!isOpen) {
     return (
-      <div className="fixed bottom-6 right-6 z-50">
-        {/* Animated Pet Button */}
-        <div 
-          onClick={() => setIsOpen(true)}
-          className="cursor-pointer relative group"
+      <div 
+        ref={widgetRef}
+        className="fixed z-50"
+        style={{ 
+          left: `${position.x}px`, 
+          top: `${position.y}px`,
+          cursor: isDragging ? 'grabbing' : 'grab'
+        }}
+      >
+        <div
+          onMouseDown={handleMouseDown}
+          className="relative group"
         >
-          {/* Pet Container with bounce animation */}
-          <div className="relative animate-bounce hover:animate-none transition-all duration-300">
-            {/* Pet body - rounded friendly shape */}
-            <div className="w-20 h-20 bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 rounded-full shadow-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 relative overflow-hidden">
-              {/* Shine effect */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent animate-pulse"></div>
-              
-              {/* Pet face */}
-              <div className="relative z-10">
-                {/* Eyes */}
-                <div className="flex gap-3 mb-2">
-                  <div className="w-3 h-3 bg-white rounded-full shadow-inner relative">
-                    <div className="absolute top-1 left-1 w-2 h-2 bg-gray-800 rounded-full animate-pulse"></div>
-                  </div>
-                  <div className="w-3 h-3 bg-white rounded-full shadow-inner relative">
-                    <div className="absolute top-1 left-1 w-2 h-2 bg-gray-800 rounded-full animate-pulse"></div>
-                  </div>
-                </div>
-                
-                {/* Nose/Mouth - cute smile */}
-                <div className="flex flex-col items-center">
-                  <div className="w-2 h-2 bg-pink-600 rounded-full"></div>
-                  <div className="w-6 h-3 border-2 border-pink-600 rounded-b-full mt-1"></div>
-                </div>
+          <Button
+            onClick={(e) => {
+              if (!isDragging) {
+                e.stopPropagation();
+                setIsOpen(true);
+              }
+            }}
+            size="lg"
+            className="h-16 w-16 rounded-full shadow-2xl bg-gradient-to-br from-gray-900 via-gray-800 to-black border-2 border-gray-700 hover:border-primary hover:scale-110 transition-all duration-300 group relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-primary/10 to-transparent group-hover:via-primary/20 transition-all duration-300"></div>
+            <Bot className="h-8 w-8 text-primary relative z-10 group-hover:scale-110 transition-transform duration-300" />
+            <div className="absolute -top-1 -right-1">
+              <div className="h-5 w-5 bg-green-500 rounded-full flex items-center justify-center shadow-lg border-2 border-gray-900">
+                <div className="h-2 w-2 bg-white rounded-full animate-pulse"></div>
               </div>
-              
-              {/* Sparkles around pet */}
-              <Sparkles className="absolute top-2 right-2 h-3 w-3 text-yellow-300 animate-spin" style={{ animationDuration: '3s' }} />
             </div>
-            
-            {/* Pet ears - animated */}
-            <div className="absolute -top-2 left-2 w-4 h-6 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full transform -rotate-45 group-hover:rotate-[-30deg] transition-transform duration-300"></div>
-            <div className="absolute -top-2 right-2 w-4 h-6 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full transform rotate-45 group-hover:rotate-[30deg] transition-transform duration-300"></div>
-            
-            {/* Pet tail - wagging animation */}
-            <div className="absolute -bottom-1 -right-3 w-8 h-8">
-              <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-400 rounded-full animate-wag origin-left"></div>
+            <div className="absolute -top-1 -left-1">
+              <Move className="h-4 w-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
-          </div>
-          
-          {/* Speech bubble notification */}
-          <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white rounded-lg px-3 py-1 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
-            <p className="text-xs font-medium text-gray-800">Chat with me! 💬</p>
-            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 rotate-45 w-2 h-2 bg-white"></div>
-          </div>
-        </div>
-        
-        {/* Notification badge */}
-        <div className="absolute -top-2 -right-2">
-          <div className="h-6 w-6 bg-red-500 rounded-full flex items-center justify-center animate-pulse shadow-lg">
-            <span className="text-white text-xs font-bold">!</span>
-          </div>
+          </Button>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div 
+      ref={widgetRef}
+      className="fixed z-50"
+      style={{ 
+        left: `${position.x}px`, 
+        top: `${position.y}px`
+      }}
+    >
       <Card className={`w-80 ${isMinimized ? 'h-16' : 'h-96'} glass-card border-primary/20 shadow-2xl transition-all duration-300`}>
-        <CardHeader className="pb-2">
-          <CardTitle className="flex items-center justify-between text-sm">
+        <CardHeader 
+          className="pb-2 bg-gradient-to-r from-gray-900 to-gray-800 border-b border-gray-700 cursor-grab active:cursor-grabbing select-none"
+          onMouseDown={handleMouseDown}
+        >
+          <CardTitle className="flex items-center justify-between text-sm pointer-events-none">
             <div className="flex items-center gap-2">
-              {/* Mini animated pet in header */}
-              <div className="relative w-8 h-8">
-                <div className="w-8 h-8 bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 rounded-full shadow-lg flex items-center justify-center relative overflow-hidden animate-pulse">
-                  {/* Eyes */}
-                  <div className="flex gap-1.5">
-                    <div className="w-1.5 h-1.5 bg-white rounded-full">
-                      <div className="w-1 h-1 bg-gray-800 rounded-full"></div>
-                    </div>
-                    <div className="w-1.5 h-1.5 bg-white rounded-full">
-                      <div className="w-1 h-1 bg-gray-800 rounded-full"></div>
-                    </div>
-                  </div>
-                </div>
-                {/* Mini ear */}
-                <div className="absolute -top-1 left-1 w-2 h-3 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full transform -rotate-45"></div>
+              <Move className="h-4 w-4 text-gray-400 pointer-events-none" />
+              <div className="relative w-8 h-8 bg-gradient-to-br from-gray-800 to-black rounded-full flex items-center justify-center border border-primary/30">
+                <Bot className="h-4 w-4 text-primary" />
               </div>
-              <span className="font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Pet Assistant</span>
-              <Badge variant="outline" className="text-xs">
+              <span className="font-bold text-white">AI Assistant</span>
+              <Badge variant="outline" className="text-xs border-green-500/50 text-green-400">
                 <div className="w-1.5 h-1.5 bg-green-500 rounded-full mr-1 animate-pulse"></div>
                 Online
               </Badge>
             </div>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 pointer-events-auto">
               <Button
                 variant="ghost"
                 size="sm"
@@ -253,12 +288,8 @@ const FloatingChatWidget = () => {
                       {message.sender === "user" ? (
                         <User className="h-3 w-3" />
                       ) : (
-                        // Mini animated pet for bot messages
-                        <div className="w-6 h-6 bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 rounded-full shadow-md flex items-center justify-center relative">
-                          <div className="flex gap-1">
-                            <div className="w-1 h-1 bg-white rounded-full"></div>
-                            <div className="w-1 h-1 bg-white rounded-full"></div>
-                          </div>
+                        <div className="w-6 h-6 bg-gradient-to-br from-gray-800 to-black rounded-full shadow-md flex items-center justify-center border border-primary/30">
+                          <Bot className="h-3 w-3 text-primary" />
                         </div>
                       )}
                     </div>
@@ -278,18 +309,14 @@ const FloatingChatWidget = () => {
                 
                 {isTyping && (
                   <div className="flex items-start gap-2">
-                    {/* Animated pet thinking */}
-                    <div className="w-6 h-6 bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 rounded-full shadow-md flex items-center justify-center relative animate-bounce flex-shrink-0">
-                      <div className="flex gap-1">
-                        <div className="w-1 h-1 bg-white rounded-full"></div>
-                        <div className="w-1 h-1 bg-white rounded-full"></div>
-                      </div>
+                    <div className="w-6 h-6 bg-gradient-to-br from-gray-800 to-black rounded-full shadow-md flex items-center justify-center border border-primary/30 flex-shrink-0">
+                      <Bot className="h-3 w-3 text-primary animate-pulse" />
                     </div>
-                    <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-purple-500/30 text-white p-2 rounded-lg">
+                    <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-primary/30 text-white p-2 rounded-lg">
                       <div className="flex gap-1">
-                        <div className="w-1.5 h-1.5 bg-purple-400 rounded-full animate-bounce"></div>
-                        <div className="w-1.5 h-1.5 bg-pink-400 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
-                        <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
+                        <div className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce"></div>
+                        <div className="w-1.5 h-1.5 bg-primary/70 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
+                        <div className="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
                       </div>
                     </div>
                   </div>

@@ -60,14 +60,14 @@ const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Information */}
           <div className="space-y-6">
-            <Card className="glass-card border-primary/20">
+            <Card className="glass-card border-primary/20 hover:border-primary/40 transition-all duration-200">
               <CardHeader>
                 <CardTitle className="text-2xl text-primary">Contact Information</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 {contactInfo.map((info, index) => (
-                  <div key={index} className="flex items-start gap-4 group">
-                    <div className="p-3 rounded-full bg-primary/10 text-primary group-hover:glow-primary transition-all duration-300">
+                  <div key={index} className="flex items-start gap-4 group transition-all duration-200">
+                    <div className="p-3 rounded-full bg-primary/10 text-primary transition-all duration-200">
                       {info.icon}
                     </div>
                     <div className="flex-1">
@@ -85,7 +85,7 @@ const Contact = () => {
             </Card>
 
             {/* Social Links */}
-            <Card className="glass-card border-primary/20">
+            <Card className="glass-card border-primary/20 hover:border-primary/40 transition-all duration-200">
               <CardHeader>
                 <CardTitle className="text-xl">Connect With Me</CardTitle>
               </CardHeader>
@@ -96,7 +96,7 @@ const Contact = () => {
                       key={index}
                       variant="outline"
                       size="lg"
-                      className="glass-card border-primary/30 hover:glow-primary transition-all duration-300 hover:scale-110"
+                      className="glass-card border-primary/30 hover:border-primary/50 transition-all duration-200 hover:scale-105"
                       asChild
                     >
                       <a href={social.url} target="_blank" rel="noopener noreferrer">

@@ -1,11 +1,32 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Contact from "@/components/Contact";
 import FloatingChatWidget from "@/components/FloatingChatWidget";
 
 const ContactPage = () => {
+  const [activePage, setActivePage] = useState("contact");
+  const navigate = useNavigate();
+
+  const handlePageChange = (pageId: string) => {
+    setActivePage(pageId);
+    const routes: Record<string, string> = {
+      hero: "/",
+      about: "/about",
+      skills: "/skills",
+      projects: "/projects",
+      education: "/education",
+      "ai-chat": "/chat",
+      contact: "/contact"
+    };
+    if (routes[pageId]) {
+      navigate(routes[pageId]);
+    }
+  };
+
   return (
     <div className="min-h-screen">
-      <Navigation />
+      <Navigation activePage={activePage} onPageChange={handlePageChange} />
       <main>
         <Contact />
       </main>

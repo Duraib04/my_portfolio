@@ -30,7 +30,7 @@ const AIChat = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      text: "Woof! � I'm Durai's friendly AI pet assistant. I know everything about his skills, projects, and experience. I'm here to have a pawsome conversation with you! What's your name, and what brings you here today? *wags tail excitedly*",
+      text: "Hello! I'm Durai's professional AI assistant. I can provide detailed information about his technical expertise, professional experience, project portfolio, and career background. How may I assist you today?",
       sender: "bot",
       timestamp: new Date(),
       type: "text"
@@ -271,41 +271,21 @@ const AIChat = () => {
           </p>
         </div>
 
-        <Card className="glass-card border-primary/20 glow-primary">
-          <CardHeader>
+        <Card className="glass-card border-primary/20 glow-primary bg-gradient-to-br from-gray-900/50 to-black/50">
+          <CardHeader className="bg-gradient-to-r from-gray-900 to-gray-800 border-b border-gray-700">
             <CardTitle className="flex items-center gap-3">
-              {/* Animated pet in header */}
-              <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 rounded-full shadow-lg flex items-center justify-center relative overflow-hidden group hover:scale-110 transition-transform duration-300">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent animate-pulse"></div>
-                  <div className="relative z-10">
-                    <div className="flex gap-2 mb-1">
-                      <div className="w-2.5 h-2.5 bg-white rounded-full shadow-inner">
-                        <div className="w-2 h-2 bg-gray-800 rounded-full animate-pulse"></div>
-                      </div>
-                      <div className="w-2.5 h-2.5 bg-white rounded-full shadow-inner">
-                        <div className="w-2 h-2 bg-gray-800 rounded-full animate-pulse"></div>
-                      </div>
-                    </div>
-                    <div className="flex flex-col items-center">
-                      <div className="w-1.5 h-1.5 bg-pink-600 rounded-full"></div>
-                      <div className="w-4 h-2 border-2 border-pink-600 rounded-b-full mt-0.5"></div>
-                    </div>
-                  </div>
-                  <Sparkles className="absolute top-1 right-1 h-2.5 w-2.5 text-yellow-300 animate-spin" style={{ animationDuration: '3s' }} />
-                </div>
-                {/* Ear */}
-                <div className="absolute -top-1 left-1 w-3 h-5 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full transform -rotate-45"></div>
+              <div className="w-12 h-12 bg-gradient-to-br from-gray-800 to-black rounded-full shadow-lg flex items-center justify-center border-2 border-primary/30 hover:scale-110 transition-transform duration-300">
+                <Bot className="h-6 w-6 text-primary" />
               </div>
-              <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-bold">Chat with Durai's AI Pet Assistant</span>
-              <Badge className="bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 border-purple-300">
-                <Sparkles className="h-3 w-3 mr-1" />
-                Friendly & Interactive
+              <span className="text-white font-bold">Professional AI Assistant</span>
+              <Badge className="bg-gradient-to-r from-primary/20 to-blue-600/20 text-primary border-primary/50">
+                <Bot className="h-3 w-3 mr-1" />
+                Expert Mode
               </Badge>
               {context.userName && (
-                <Badge variant="outline" className="ml-auto border-purple-300">
-                  <Heart className="h-3 w-3 mr-1 text-pink-500" />
-                  Welcome, {context.userName}!
+                <Badge variant="outline" className="ml-auto border-primary/30 text-primary">
+                  <User className="h-3 w-3 mr-1" />
+                  {context.userName}
                 </Badge>
               )}
             </CardTitle>
@@ -328,19 +308,8 @@ const AIChat = () => {
                     {message.sender === "user" ? (
                       <User className="h-4 w-4" />
                     ) : (
-                      // Animated pet for bot messages
-                      <div className="w-10 h-10 bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 rounded-full shadow-lg flex items-center justify-center relative overflow-hidden group">
-                        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent"></div>
-                        <div className="relative z-10">
-                          <div className="flex gap-2">
-                            <div className="w-2 h-2 bg-white rounded-full shadow-inner">
-                              <div className="w-1.5 h-1.5 bg-gray-800 rounded-full"></div>
-                            </div>
-                            <div className="w-2 h-2 bg-white rounded-full shadow-inner">
-                              <div className="w-1.5 h-1.5 bg-gray-800 rounded-full"></div>
-                            </div>
-                          </div>
-                        </div>
+                      <div className="w-10 h-10 bg-gradient-to-br from-gray-800 to-black rounded-full shadow-lg flex items-center justify-center border-2 border-primary/30">
+                        <Bot className="h-5 w-5 text-primary" />
                       </div>
                     )}
                   </div>
@@ -357,7 +326,7 @@ const AIChat = () => {
                       <p className="text-sm leading-relaxed whitespace-pre-line">{message.text}</p>
                     </div>
                     <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
-                      {message.sender === "bot" && <span>🐾</span>}
+                      {message.sender === "bot" && <Bot className="h-3 w-3" />}
                       {message.timestamp.toLocaleTimeString()}
                     </p>
                   </div>
@@ -366,26 +335,15 @@ const AIChat = () => {
               
               {isTyping && (
                 <div className="flex items-start gap-3">
-                  {/* Animated pet thinking */}
-                  <div className="w-10 h-10 bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 rounded-full shadow-lg flex items-center justify-center relative overflow-hidden animate-bounce">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent"></div>
-                    <div className="relative z-10">
-                      <div className="flex gap-2">
-                        <div className="w-2 h-2 bg-white rounded-full shadow-inner">
-                          <div className="w-1.5 h-1.5 bg-gray-800 rounded-full"></div>
-                        </div>
-                        <div className="w-2 h-2 bg-white rounded-full shadow-inner">
-                          <div className="w-1.5 h-1.5 bg-gray-800 rounded-full"></div>
-                        </div>
-                      </div>
-                    </div>
+                  <div className="w-10 h-10 bg-gradient-to-br from-gray-800 to-black rounded-full shadow-lg flex items-center justify-center border-2 border-primary/30">
+                    <Bot className="h-5 w-5 text-primary animate-pulse" />
                   </div>
-                  <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-purple-500/30 text-white p-4 rounded-lg">
+                  <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-primary/30 text-white p-4 rounded-lg">
                     <div className="flex gap-1 items-center">
-                      <span className="text-sm text-purple-300 mr-2">*thinking...*</span>
-                      <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce"></div>
-                      <div className="w-2 h-2 bg-pink-400 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
-                      <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
+                      <span className="text-sm text-primary/70 mr-2">Processing...</span>
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-primary/70 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
+                      <div className="w-2 h-2 bg-primary/40 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
                     </div>
                   </div>
                 </div>

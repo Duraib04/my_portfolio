@@ -181,44 +181,21 @@ const Projects = () => {
           {projects.map((project, index) => (
             <Card
               key={index}
-              className="glass-card border-primary/20 hover:glow-primary transition-all duration-500 hover:scale-[1.03] hover:-translate-y-2 hover:rotate-1 group relative overflow-hidden"
-              style={{
-                animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
-                transformStyle: 'preserve-3d',
-                perspective: '1000px'
-              }}
-              onMouseMove={(e) => {
-                const card = e.currentTarget;
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = (y - centerY) / 20;
-                const rotateY = (centerX - x) / 20;
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03) translateY(-8px)`;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1) translateY(0)';
-              }}
+              className="glass-card border-primary/20 hover:border-primary/40 transition-all duration-200 group"
             >
-              {/* Animated gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/5 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              {/* Shine effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
               <CardHeader>
                 <div className="flex justify-between items-start mb-2">
-                  <Badge className={`${getCategoryColor(project.category)} transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg`}>
+                  <Badge className={`${getCategoryColor(project.category)}`}>
                     {project.category}
                   </Badge>
-                  <Badge className={`${getStatusColor(project.status)} transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg animate-pulse`}>
+                  <Badge className={`${getStatusColor(project.status)}`}>
                     {project.status}
                   </Badge>
                 </div>
-                <CardTitle className="text-xl group-hover:text-primary transition-all duration-300 group-hover:scale-105 transform-gpu">
+                <CardTitle className="text-xl">
                   {project.title}
                 </CardTitle>
-                <Badge variant="outline" className="w-fit text-xs transition-all duration-300 group-hover:border-primary group-hover:text-primary">
+                <Badge variant="outline" className="w-fit text-xs">
                   {project.type}
                 </Badge>
               </CardHeader>
@@ -252,10 +229,7 @@ const Projects = () => {
                       <Badge
                         key={techIndex}
                         variant="secondary"
-                        className="text-xs bg-secondary/50 hover:bg-primary/20 hover:border-primary hover:scale-110 hover:rotate-2 transition-all duration-300 cursor-pointer"
-                        style={{
-                          animation: `slideInRight 0.5s ease-out ${techIndex * 0.1}s both`
-                        }}
+                        className="text-xs bg-secondary/50 hover:bg-primary/20 transition-all duration-200"
                       >
                         {tech}
                       </Badge>

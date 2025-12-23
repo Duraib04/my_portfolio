@@ -3,8 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Suspense, lazy, useState, useEffect } from "react";
-import LoadingAnimation from "@/components/LoadingAnimation";
+import { Suspense, lazy } from "react";
 import NotFound from "./pages/NotFound";
 
 const Index = lazy(() => import("./pages/Index"));
@@ -18,25 +17,14 @@ const ContactPage = lazy(() => import("./pages/ContactPage"));
 const queryClient = new QueryClient();
 
 const App = () => {
-  const [showLoading, setShowLoading] = useState(true);
-
-  useEffect(() => {
-    // Ensure loading animation shows for at least 2 seconds
-    const timer = setTimeout(() => {
-      setShowLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        {showLoading && <LoadingAnimation />}
         <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-          <Suspense fallback={<LoadingAnimation />}>
+          <Suspense fallback={<div className="min-h-screen bg-gradient-to-b from-gray-900 via-purple-900 to-gray-900" />}>
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/about" element={<AboutPage />} />
