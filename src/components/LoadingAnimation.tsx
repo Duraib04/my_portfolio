@@ -37,7 +37,7 @@ const LoadingAnimation = () => {
   if (!isLoading) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-br from-[#0a0612] via-[#0d0818] to-[#050208] overflow-hidden">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-br from-[#0a0a1a] via-[#0d1025] to-[#050510] overflow-hidden">
       {/* Royal animated background particles */}
       <div className="absolute inset-0">
         {[...Array(30)].map((_, i) => (
@@ -47,7 +47,7 @@ const LoadingAnimation = () => {
             style={{
               width: `${Math.random() * 4 + 2}px`,
               height: `${Math.random() * 4 + 2}px`,
-              background: i % 2 === 0 ? 'linear-gradient(135deg, #ffd700, #ffb347)' : 'linear-gradient(135deg, #9333ea, #7c3aed)',
+              background: i % 2 === 0 ? 'linear-gradient(135deg, #4169E1, #6495ED)' : 'linear-gradient(135deg, #1E3A8A, #3B82F6)',
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               opacity: 0.6,
@@ -71,7 +71,7 @@ const LoadingAnimation = () => {
               top: `${i * 7}%`,
               left: '-100%',
               transform: 'rotate(-25deg)',
-              background: `linear-gradient(90deg, transparent, ${i % 2 === 0 ? '#ffd700' : '#9333ea'}, transparent)`,
+              background: `linear-gradient(90deg, transparent, ${i % 2 === 0 ? '#4169E1' : '#1E3A8A'}, transparent)`,
               animation: `slideRight ${0.8 + i * 0.05}s ease-out forwards`,
               animationDelay: `${i * 0.05}s`
             }}
@@ -91,11 +91,11 @@ const LoadingAnimation = () => {
               }`}
               style={{
                 background: i % 3 === 0 
-                  ? 'linear-gradient(135deg, #ffd700, #f59e0b)' 
+                  ? 'linear-gradient(135deg, #4169E1, #6495ED)' 
                   : i % 3 === 1 
-                  ? 'linear-gradient(135deg, #9333ea, #7c3aed)'
-                  : 'linear-gradient(135deg, #3b82f6, #2563eb)',
-                boxShadow: visible ? `0 4px 15px ${i % 3 === 0 ? 'rgba(255, 215, 0, 0.4)' : i % 3 === 1 ? 'rgba(147, 51, 234, 0.4)' : 'rgba(59, 130, 246, 0.4)'}` : 'none',
+                  ? 'linear-gradient(135deg, #1E3A8A, #3B82F6)'
+                  : 'linear-gradient(135deg, #C9B037, #D4AF37)',
+                boxShadow: visible ? `0 4px 15px ${i % 3 === 0 ? 'rgba(65, 105, 225, 0.4)' : i % 3 === 1 ? 'rgba(30, 58, 138, 0.4)' : 'rgba(212, 175, 55, 0.4)'}` : 'none',
                 transform: visible ? 'translateY(0) rotate(0deg)' : 'translateY(-50px) rotate(-15deg)',
                 transitionDelay: `${i * 50}ms`
               }}
@@ -106,11 +106,11 @@ const LoadingAnimation = () => {
         {/* Royal title reveal with crown */}
         <div className="mb-4 overflow-hidden flex items-center gap-4">
           <Crown 
-            className={`w-12 h-12 text-yellow-400 transition-all duration-1000 ${
+            className={`w-12 h-12 text-blue-400 transition-all duration-1000 ${
               phase >= 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
             }`}
             style={{
-              filter: 'drop-shadow(0 0 10px rgba(255, 215, 0, 0.5))'
+              filter: 'drop-shadow(0 0 10px rgba(65, 105, 225, 0.5))'
             }}
           />
           <h1 
@@ -118,21 +118,21 @@ const LoadingAnimation = () => {
               phase >= 0 ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
             }`}
             style={{
-              background: 'linear-gradient(135deg, #ffd700, #f59e0b, #ffd700)',
+              background: 'linear-gradient(135deg, #4169E1, #6495ED, #4169E1)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-              textShadow: '0 0 30px rgba(255, 215, 0, 0.3)',
+              textShadow: '0 0 30px rgba(65, 105, 225, 0.3)',
               fontFamily: 'serif'
             }}
           >
             PORTFOLIO
           </h1>
           <Crown 
-            className={`w-12 h-12 text-yellow-400 transition-all duration-1000 ${
+            className={`w-12 h-12 text-blue-400 transition-all duration-1000 ${
               phase >= 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
             }`}
             style={{
-              filter: 'drop-shadow(0 0 10px rgba(255, 215, 0, 0.5))'
+              filter: 'drop-shadow(0 0 10px rgba(65, 105, 225, 0.5))'
             }}
           />
         </div>
@@ -144,7 +144,7 @@ const LoadingAnimation = () => {
               phase >= 1 ? 'translate-x-0 opacity-100 scale-100' : 'translate-x-20 opacity-0 scale-90'
             }`}
             style={{
-              background: 'linear-gradient(135deg, #ffd700, #9333ea, #3b82f6)',
+              background: 'linear-gradient(135deg, #4169E1, #1E3A8A, #D4AF37)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               filter: phase >= 1 ? 'none' : 'blur(10px)'
@@ -157,7 +157,7 @@ const LoadingAnimation = () => {
           {phase >= 1 && phase < 2 && (
             <>
               <div 
-                className="absolute inset-0 text-4xl md:text-6xl font-bold text-yellow-400 opacity-30"
+                className="absolute inset-0 text-4xl md:text-6xl font-bold text-blue-400 opacity-30"
                 style={{
                   animation: 'glitch1 0.3s infinite',
                   clipPath: 'polygon(0 0, 100% 0, 100% 45%, 0 45%)'
@@ -166,7 +166,7 @@ const LoadingAnimation = () => {
                 DURAI B
               </div>
               <div 
-                className="absolute inset-0 text-4xl md:text-6xl font-bold text-purple-500 opacity-30"
+                className="absolute inset-0 text-4xl md:text-6xl font-bold text-indigo-500 opacity-30"
                 style={{
                   animation: 'glitch2 0.3s infinite',
                   clipPath: 'polygon(0 55%, 100% 55%, 100% 100%, 0 100%)'
@@ -180,17 +180,17 @@ const LoadingAnimation = () => {
 
         {/* Royal progress bar */}
         <div 
-          className={`relative w-64 h-2 bg-purple-950/50 rounded-full overflow-hidden transition-all duration-500 ${
+          className={`relative w-64 h-2 bg-blue-950/50 rounded-full overflow-hidden transition-all duration-500 ${
             phase >= 2 ? 'opacity-0 scale-x-0' : 'opacity-100 scale-x-100'
           }`}
           style={{
-            boxShadow: '0 0 20px rgba(255, 215, 0, 0.2)'
+            boxShadow: '0 0 20px rgba(65, 105, 225, 0.2)'
           }}
         >
           <div 
             className="absolute inset-0 rounded-full"
             style={{
-              background: 'linear-gradient(90deg, #ffd700, #9333ea, #3b82f6)',
+              background: 'linear-gradient(90deg, #4169E1, #1E3A8A, #D4AF37)',
               animation: 'progressFill 2.5s ease-in-out forwards'
             }}
           />
@@ -209,12 +209,12 @@ const LoadingAnimation = () => {
             phase >= 2 ? 'opacity-0' : 'opacity-100'
           }`}
           style={{
-            color: phase === 0 ? '#ffd700' : phase === 1 ? '#9333ea' : '#22c55e'
+            color: phase === 0 ? '#4169E1' : phase === 1 ? '#1E3A8A' : '#22c55e'
           }}
         >
-          {phase === 0 && '⚔️ ASSEMBLING BLOCKS...'}
-          {phase === 1 && '👑 PREPARING ROYAL EXPERIENCE...'}
-          {phase >= 2 && '✨ READY!'}
+          {phase === 0 && 'ASSEMBLING BLOCKS...'}
+          {phase === 1 && 'PREPARING ROYAL EXPERIENCE...'}
+          {phase >= 2 && 'READY!'}
         </div>
       </div>
 

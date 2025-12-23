@@ -6,61 +6,61 @@
 
 @layer base {
   :root {
-    /* Royal Dark Theme */
-    --background: 260 30% 6%;
-    --foreground: 45 30% 96%;
+    /* Royal Blue Dark Theme */
+    --background: 220 40% 6%;
+    --foreground: 220 20% 96%;
 
-    --card: 260 25% 10%;
-    --card-foreground: 45 30% 96%;
+    --card: 220 35% 10%;
+    --card-foreground: 220 20% 96%;
 
-    --popover: 260 25% 10%;
-    --popover-foreground: 45 30% 96%;
+    --popover: 220 35% 10%;
+    --popover-foreground: 220 20% 96%;
 
-    /* Royal Gold Primary */
-    --primary: 45 90% 55%;
-    --primary-foreground: 260 30% 6%;
+    /* Royal Blue Primary */
+    --primary: 220 85% 55%;
+    --primary-foreground: 220 40% 6%;
 
-    --secondary: 260 20% 15%;
-    --secondary-foreground: 45 30% 96%;
+    --secondary: 220 30% 15%;
+    --secondary-foreground: 220 20% 96%;
 
-    --muted: 260 20% 15%;
-    --muted-foreground: 45 20% 70%;
+    --muted: 220 30% 15%;
+    --muted-foreground: 220 20% 70%;
 
-    /* Royal Purple Accent */
-    --accent: 280 70% 50%;
-    --accent-foreground: 45 30% 96%;
+    /* Royal Silver/Gold Accent */
+    --accent: 45 70% 55%;
+    --accent-foreground: 220 40% 6%;
 
     /* Royal Burgundy for destructive */
     --destructive: 345 75% 45%;
-    --destructive-foreground: 45 30% 96%;
+    --destructive-foreground: 220 20% 96%;
 
-    --border: 260 20% 18%;
-    --input: 260 20% 15%;
-    --ring: 45 90% 55%;
+    --border: 220 30% 18%;
+    --input: 220 30% 15%;
+    --ring: 220 85% 55%;
 
     --radius: 0.75rem;
 
-    /* Royal design tokens */
-    --hero-gradient: linear-gradient(135deg, hsl(45 90% 55%) 0%, hsl(280 70% 50%) 50%, hsl(220 80% 40%) 100%);
-    --card-gradient: linear-gradient(135deg, hsl(260 25% 10%) 0%, hsl(260 30% 15%) 100%);
-    --text-gradient: linear-gradient(135deg, hsl(45 90% 60%) 0%, hsl(45 80% 50%) 50%, hsl(280 70% 60%) 100%);
-    --glow-primary: 0 0 40px hsl(45 90% 55% / 0.4);
-    --glow-accent: 0 0 40px hsl(280 70% 50% / 0.4);
-    --glow-royal: 0 0 60px hsl(45 90% 55% / 0.3), 0 0 100px hsl(280 70% 50% / 0.2);
+    /* Royal Blue design tokens */
+    --hero-gradient: linear-gradient(135deg, hsl(220 85% 55%) 0%, hsl(240 70% 45%) 50%, hsl(260 60% 40%) 100%);
+    --card-gradient: linear-gradient(135deg, hsl(220 35% 10%) 0%, hsl(220 40% 15%) 100%);
+    --text-gradient: linear-gradient(135deg, hsl(220 85% 65%) 0%, hsl(45 70% 60%) 50%, hsl(220 80% 55%) 100%);
+    --glow-primary: 0 0 40px hsl(220 85% 55% / 0.4);
+    --glow-accent: 0 0 40px hsl(45 70% 55% / 0.4);
+    --glow-royal: 0 0 60px hsl(220 85% 55% / 0.3), 0 0 100px hsl(240 70% 45% / 0.2);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     
     /* Royal Glass morphism */
-    --glass-bg: hsl(260 25% 10% / 0.85);
-    --glass-border: hsl(45 90% 55% / 0.3);
+    --glass-bg: hsl(220 35% 10% / 0.85);
+    --glass-border: hsl(220 85% 55% / 0.3);
     
     /* Royal grid pattern */
-    --grid-color: hsl(45 90% 55% / 0.08);
+    --grid-color: hsl(220 85% 55% / 0.08);
     
     /* Royal colors */
-    --royal-gold: 45 90% 55%;
-    --royal-purple: 280 70% 50%;
-    --royal-blue: 220 80% 45%;
-    --royal-burgundy: 345 60% 40%;
+    --royal-blue: 220 85% 55%;
+    --royal-navy: 220 50% 25%;
+    --royal-gold: 45 70% 55%;
+    --royal-silver: 220 15% 75%;
     --royal-cream: 45 30% 90%;
 
     --sidebar-background: 0 0% 98%;
@@ -127,9 +127,9 @@
   body {
     @apply bg-background text-foreground;
     background-image: 
-      radial-gradient(circle at 20% 80%, hsl(45 90% 55% / 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, hsl(280 70% 50% / 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 50% 50%, hsl(220 80% 45% / 0.05) 0%, transparent 70%),
+      radial-gradient(circle at 20% 80%, hsl(220 85% 55% / 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, hsl(240 70% 45% / 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, hsl(45 70% 55% / 0.05) 0%, transparent 70%),
       repeating-linear-gradient(
         0deg,
         transparent,
@@ -187,11 +187,11 @@
   }
 
   .royal-card {
-    background: linear-gradient(135deg, hsl(260 25% 12%) 0%, hsl(260 30% 8%) 100%);
-    border: 1px solid hsl(45 90% 55% / 0.2);
+    background: linear-gradient(135deg, hsl(220 35% 12%) 0%, hsl(220 40% 8%) 100%);
+    border: 1px solid hsl(220 85% 55% / 0.2);
     box-shadow: 
-      0 4px 20px hsl(260 30% 5% / 0.5),
-      inset 0 1px 0 hsl(45 90% 55% / 0.1);
+      0 4px 20px hsl(220 40% 5% / 0.5),
+      inset 0 1px 0 hsl(220 85% 55% / 0.1);
   }
 
   .hero-gradient {
@@ -204,8 +204,8 @@
 
   .royal-border {
     border: 2px solid transparent;
-    background: linear-gradient(hsl(260 25% 10%), hsl(260 25% 10%)) padding-box,
-                linear-gradient(135deg, hsl(45 90% 55%), hsl(280 70% 50%), hsl(220 80% 45%)) border-box;
+    background: linear-gradient(hsl(220 35% 10%), hsl(220 35% 10%)) padding-box,
+                linear-gradient(135deg, hsl(220 85% 55%), hsl(240 70% 45%), hsl(45 70% 55%)) border-box;
   }
 
   /* Animation delays */
@@ -322,10 +322,10 @@
 
   @keyframes pulse-glow {
     0%, 100% {
-      box-shadow: 0 0 20px rgba(218, 165, 32, 0.4);
+      box-shadow: 0 0 20px rgba(65, 105, 225, 0.4);
     }
     50% {
-      box-shadow: 0 0 40px rgba(147, 51, 234, 0.6);
+      box-shadow: 0 0 40px rgba(65, 105, 225, 0.6);
     }
   }
 
@@ -359,9 +359,9 @@
   .animate-text-shimmer {
     background: linear-gradient(
       90deg,
-      hsl(45 90% 60%),
-      hsl(280 70% 60%),
-      hsl(45 90% 60%)
+      hsl(220 85% 65%),
+      hsl(45 70% 60%),
+      hsl(220 85% 65%)
     );
     background-size: 200% auto;
     animation: text-shimmer 3s ease-in-out infinite;
@@ -373,7 +373,7 @@
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(255, 215, 0, 0.15),
+      rgba(65, 105, 225, 0.15),
       transparent
     );
     background-size: 200% 100%;
@@ -567,11 +567,11 @@
   @keyframes royal-float {
     0%, 100% {
       transform: translateY(0) rotate(0deg);
-      filter: drop-shadow(0 10px 20px hsl(45 90% 55% / 0.3));
+      filter: drop-shadow(0 10px 20px hsl(220 85% 55% / 0.3));
     }
     50% {
       transform: translateY(-15px) rotate(2deg);
-      filter: drop-shadow(0 20px 30px hsl(280 70% 50% / 0.3));
+      filter: drop-shadow(0 20px 30px hsl(240 70% 45% / 0.3));
     }
   }
 
@@ -583,15 +583,15 @@
   @keyframes crown-glow {
     0%, 100% {
       box-shadow: 
-        0 0 20px hsl(45 90% 55% / 0.4),
-        0 0 40px hsl(45 90% 55% / 0.2),
-        inset 0 0 20px hsl(45 90% 55% / 0.1);
+        0 0 20px hsl(220 85% 55% / 0.4),
+        0 0 40px hsl(220 85% 55% / 0.2),
+        inset 0 0 20px hsl(220 85% 55% / 0.1);
     }
     50% {
       box-shadow: 
-        0 0 30px hsl(45 90% 55% / 0.6),
-        0 0 60px hsl(280 70% 50% / 0.3),
-        inset 0 0 30px hsl(45 90% 55% / 0.2);
+        0 0 30px hsl(220 85% 55% / 0.6),
+        0 0 60px hsl(45 70% 55% / 0.3),
+        inset 0 0 30px hsl(220 85% 55% / 0.2);
     }
   }
 

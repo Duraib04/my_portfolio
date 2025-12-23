@@ -35,7 +35,7 @@ const Skills = () => {
   const skillCategories = [
     {
       title: "Programming Languages",
-      icon: "👑",
+      icon: <Crown className="w-5 h-5 text-blue-400" />,
       skills: [
         { name: "Python", level: 85 },
         { name: "C", level: 80 },
@@ -46,7 +46,7 @@ const Skills = () => {
     },
     {
       title: "Web Development",
-      icon: "⚔️",
+      icon: <Star className="w-5 h-5 text-blue-400" />,
       skills: [
         { name: "React", level: 80 },
         { name: "Node.js", level: 75 },
@@ -57,7 +57,7 @@ const Skills = () => {
     },
     {
       title: "Cloud & Data Tools",
-      icon: "🏰",
+      icon: <Award className="w-5 h-5 text-blue-400" />,
       skills: [
         { name: "AWS", level: 70 },
         { name: "Excel", level: 85 },
@@ -68,7 +68,7 @@ const Skills = () => {
     },
     {
       title: "Software & Productivity",
-      icon: "🛡️",
+      icon: <Crown className="w-5 h-5 text-amber-400" />,
       skills: [
         { name: "Microsoft Office", level: 90 },
         { name: "Canva", level: 80 },
@@ -125,17 +125,17 @@ const Skills = () => {
   ];
 
   const getSkillColor = (level: number) => {
-    if (level >= 80) return "bg-gradient-to-r from-yellow-500 to-amber-500";
-    if (level >= 70) return "bg-gradient-to-r from-purple-500 to-violet-500";
-    return "bg-gradient-to-r from-blue-500 to-indigo-500";
+    if (level >= 80) return "bg-gradient-to-r from-blue-500 to-indigo-500";
+    if (level >= 70) return "bg-gradient-to-r from-blue-400 to-blue-600";
+    return "bg-gradient-to-r from-slate-400 to-blue-400";
   };
 
   const getCertificationColor = (type: string) => {
     switch (type) {
-      case "AI/ML": return "bg-purple-500/20 text-purple-300 border-purple-500/40";
-      case "Web Dev": return "bg-yellow-500/20 text-yellow-300 border-yellow-500/40";
+      case "AI/ML": return "bg-indigo-500/20 text-indigo-300 border-indigo-500/40";
+      case "Web Dev": return "bg-blue-500/20 text-blue-300 border-blue-500/40";
       case "Programming": return "bg-emerald-500/20 text-emerald-300 border-emerald-500/40";
-      case "Hardware": return "bg-orange-500/20 text-orange-300 border-orange-500/40";
+      case "Hardware": return "bg-amber-500/20 text-amber-300 border-amber-500/40";
       default: return "bg-blue-500/20 text-blue-300 border-blue-500/40";
     }
   };
@@ -145,11 +145,11 @@ const Skills = () => {
       {/* Royal background decorations */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
-          className="absolute top-20 left-10 w-32 h-32 rounded-full bg-yellow-500/10 blur-3xl"
+          className="absolute top-20 left-10 w-32 h-32 rounded-full bg-blue-500/10 blur-3xl"
           style={{ transform: `translateY(${scrollY * 0.1}px)` }}
         />
         <div 
-          className="absolute bottom-20 right-10 w-48 h-48 rounded-full bg-purple-500/10 blur-3xl"
+          className="absolute bottom-20 right-10 w-48 h-48 rounded-full bg-indigo-500/10 blur-3xl"
           style={{ transform: `translateY(${scrollY * -0.1}px)` }}
         />
       </div>
@@ -157,11 +157,11 @@ const Skills = () => {
       <div className="container mx-auto relative z-10">
         <div className={`text-center mb-16 ${isVisible ? 'parallax-up' : 'opacity-0'}`}>
           <div className="flex items-center justify-center gap-4 mb-4">
-            <Crown className="w-8 h-8 text-yellow-400" />
+            <Crown className="w-8 h-8 text-blue-400" />
             <h2 className="text-4xl md:text-5xl font-bold text-gradient">Skills & Expertise</h2>
-            <Crown className="w-8 h-8 text-yellow-400" />
+            <Crown className="w-8 h-8 text-blue-400" />
           </div>
-          <p className="text-xl text-purple-200/70 max-w-3xl mx-auto">
+          <p className="text-xl text-blue-200/70 max-w-3xl mx-auto">
             A comprehensive skill set spanning web development, programming, and emerging technologies
           </p>
         </div>
@@ -171,14 +171,14 @@ const Skills = () => {
           {skillCategories.map((category, categoryIndex) => (
             <Card 
               key={categoryIndex} 
-              className={`royal-card border-yellow-500/20 hover:border-yellow-400/40 transition-all duration-300 group hover:shadow-lg hover:shadow-yellow-500/10 ${
+              className={`royal-card border-blue-500/20 hover:border-blue-400/40 transition-all duration-300 group hover:shadow-lg hover:shadow-blue-500/10 ${
                 isVisible ? 'animate-block-build' : 'opacity-0'
               }`}
               style={{ animationDelay: `${categoryIndex * 0.15}s` }}
             >
               <CardHeader>
-                <CardTitle className="text-xl text-yellow-300 flex items-center gap-3">
-                  <span className="text-2xl">{category.icon}</span>
+                <CardTitle className="text-xl text-blue-300 flex items-center gap-3">
+                  {category.icon}
                   {category.title}
                 </CardTitle>
               </CardHeader>
@@ -190,16 +190,16 @@ const Skills = () => {
                     style={{ animationDelay: `${(categoryIndex * 0.15) + (skillIndex * 0.1)}s` }}
                   >
                     <div className="flex justify-between items-center">
-                      <span className="font-medium text-yellow-100/90">{skill.name}</span>
-                      <span className="text-sm text-yellow-400 font-bold">{skill.level}%</span>
+                      <span className="font-medium text-blue-100/90">{skill.name}</span>
+                      <span className="text-sm text-blue-400 font-bold">{skill.level}%</span>
                     </div>
-                    <div className="relative h-2 bg-purple-950/50 rounded-full overflow-hidden">
+                    <div className="relative h-2 bg-blue-950/50 rounded-full overflow-hidden">
                       <div 
                         className={`h-full ${getSkillColor(skill.level)} rounded-full transition-all duration-1000`}
                         style={{ 
                           width: isVisible ? `${skill.level}%` : '0%',
                           transitionDelay: `${(categoryIndex * 0.15) + (skillIndex * 0.1) + 0.5}s`,
-                          boxShadow: skill.level >= 80 ? '0 0 10px rgba(255, 215, 0, 0.5)' : 'none'
+                          boxShadow: skill.level >= 80 ? '0 0 10px rgba(65, 105, 225, 0.5)' : 'none'
                         }}
                       />
                     </div>
@@ -212,16 +212,16 @@ const Skills = () => {
 
         {/* Certifications with royal styling */}
         <Card 
-          className={`royal-card border-yellow-500/20 hover:border-yellow-400/40 transition-all duration-300 ${
+          className={`royal-card border-blue-500/20 hover:border-blue-400/40 transition-all duration-300 ${
             isVisible ? 'parallax-zoom' : 'opacity-0'
           }`}
           style={{ animationDelay: '0.6s' }}
         >
           <CardHeader>
             <CardTitle className="text-2xl text-center flex items-center justify-center gap-3">
-              <Award className="w-6 h-6 text-yellow-400" />
+              <Award className="w-6 h-6 text-blue-400" />
               <span className="text-gradient">Royal Certifications</span>
-              <Award className="w-6 h-6 text-yellow-400" />
+              <Award className="w-6 h-6 text-blue-400" />
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -229,7 +229,7 @@ const Skills = () => {
               {certifications.map((cert, index) => (
                 <div 
                   key={index}
-                  className={`p-4 rounded-lg bg-purple-950/30 hover:bg-yellow-500/10 transition-all duration-300 cursor-pointer border border-yellow-500/10 hover:border-yellow-400/40 group ${
+                  className={`p-4 rounded-lg bg-blue-950/30 hover:bg-blue-500/10 transition-all duration-300 cursor-pointer border border-blue-500/10 hover:border-blue-400/40 group ${
                     isVisible ? 'animate-block-assemble' : 'opacity-0'
                   }`}
                   style={{ animationDelay: `${0.8 + (index * 0.1)}s` }}
@@ -238,13 +238,13 @@ const Skills = () => {
                     <Badge className={`${getCertificationColor(cert.type)}`}>
                       {cert.type}
                     </Badge>
-                    <span className="text-xs text-yellow-400/70 font-semibold flex items-center gap-1">
+                    <span className="text-xs text-blue-400/70 font-semibold flex items-center gap-1">
                       <Star className="w-3 h-3" />
                       {cert.date}
                     </span>
                   </div>
-                  <h4 className="font-semibold text-sm mb-1 leading-tight text-yellow-100 group-hover:text-yellow-300 transition-colors">{cert.title}</h4>
-                  <p className="text-xs text-purple-300/70">{cert.organization}</p>
+                  <h4 className="font-semibold text-sm mb-1 leading-tight text-blue-100 group-hover:text-blue-300 transition-colors">{cert.title}</h4>
+                  <p className="text-xs text-blue-300/70">{cert.organization}</p>
                 </div>
               ))}
             </div>

@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, Code2, Crown, Sword, Shield } from "lucide-react";
+import { ExternalLink, Github, Code2, Crown, Star, Award } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 
 const Projects = () => {
@@ -178,15 +178,15 @@ const Projects = () => {
       case "Healthcare":
         return "bg-rose-500/20 text-rose-300 border-rose-500/40";
       case "Web Development":
-        return "bg-yellow-500/20 text-yellow-300 border-yellow-500/40";
-      case "IoT":
-        return "bg-purple-500/20 text-purple-300 border-purple-500/40";
-      case "AI/ML":
         return "bg-blue-500/20 text-blue-300 border-blue-500/40";
+      case "IoT":
+        return "bg-indigo-500/20 text-indigo-300 border-indigo-500/40";
+      case "AI/ML":
+        return "bg-cyan-500/20 text-cyan-300 border-cyan-500/40";
       case "Software":
         return "bg-emerald-500/20 text-emerald-300 border-emerald-500/40";
       default:
-        return "bg-yellow-500/20 text-yellow-300 border-yellow-500/40";
+        return "bg-blue-500/20 text-blue-300 border-blue-500/40";
     }
   };
 
@@ -195,18 +195,18 @@ const Projects = () => {
       {/* Royal background decorations */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
-          className="absolute top-40 right-20 w-64 h-64 rounded-full bg-yellow-500/5 blur-3xl"
+          className="absolute top-40 right-20 w-64 h-64 rounded-full bg-blue-500/5 blur-3xl"
           style={{ transform: `translateY(${scrollY * 0.15}px)` }}
         />
         <div 
-          className="absolute bottom-40 left-20 w-80 h-80 rounded-full bg-purple-500/5 blur-3xl"
+          className="absolute bottom-40 left-20 w-80 h-80 rounded-full bg-indigo-500/5 blur-3xl"
           style={{ transform: `translateY(${scrollY * -0.15}px)` }}
         />
         {/* Decorative blocks */}
         {[...Array(8)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-3 h-3 bg-gradient-to-br from-yellow-400/20 to-amber-600/10 rounded-sm rotate-45"
+            className="absolute w-3 h-3 bg-gradient-to-br from-blue-400/20 to-indigo-600/10 rounded-sm rotate-45"
             style={{
               left: `${10 + i * 12}%`,
               top: `${15 + (i % 4) * 20}%`,
@@ -220,13 +220,13 @@ const Projects = () => {
         {/* Header */}
         <div className={`text-center mb-16 ${isVisible ? 'parallax-up' : 'opacity-0'}`}>
           <div className="flex items-center justify-center gap-4 mb-4">
-            <Sword className="w-8 h-8 text-yellow-400 rotate-[-45deg]" />
+            <Star className="w-8 h-8 text-blue-400" />
             <h2 className="text-4xl md:text-5xl font-bold text-gradient">
               Featured Projects
             </h2>
-            <Sword className="w-8 h-8 text-yellow-400 rotate-45" />
+            <Star className="w-8 h-8 text-blue-400" />
           </div>
-          <p className="text-xl text-purple-200/70 max-w-3xl mx-auto">
+          <p className="text-xl text-blue-200/70 max-w-3xl mx-auto">
             A comprehensive portfolio of innovative projects spanning healthcare, IoT ecosystems, 
             smart home automation, industrial solutions, and full-stack web development
           </p>
@@ -237,7 +237,7 @@ const Projects = () => {
           {projects.map((project, index) => (
             <Card
               key={index}
-              className={`royal-card border-yellow-500/20 hover:border-yellow-400/40 transition-all duration-300 group hover:shadow-lg hover:shadow-yellow-500/10 ${
+              className={`royal-card border-blue-500/20 hover:border-blue-400/40 transition-all duration-300 group hover:shadow-lg hover:shadow-blue-500/10 ${
                 isVisible ? 'animate-block-build' : 'opacity-0'
               }`}
               style={{ animationDelay: `${index * 0.1}s` }}
@@ -251,30 +251,30 @@ const Projects = () => {
                     {project.status}
                   </Badge>
                 </div>
-                <CardTitle className="text-xl text-yellow-100 group-hover:text-yellow-300 transition-colors">
+                <CardTitle className="text-xl text-blue-100 group-hover:text-blue-300 transition-colors">
                   {project.title}
                 </CardTitle>
-                <Badge variant="outline" className="w-fit text-xs border-purple-500/30 text-purple-300">
+                <Badge variant="outline" className="w-fit text-xs border-blue-500/30 text-blue-300">
                   {project.type}
                 </Badge>
               </CardHeader>
               <CardContent className="space-y-4">
                 {/* Description */}
-                <p className="text-purple-200/70 text-sm leading-relaxed">
+                <p className="text-blue-200/70 text-sm leading-relaxed">
                   {project.description}
                 </p>
 
                 {/* Features */}
                 <div>
-                  <h4 className="font-semibold mb-2 text-sm text-yellow-200">Key Features:</h4>
+                  <h4 className="font-semibold mb-2 text-sm text-blue-200">Key Features:</h4>
                   <div className="grid grid-cols-2 gap-1">
                     {project.features.map((feature, featureIndex) => (
                       <div
                         key={featureIndex}
                         className="flex items-center gap-2 text-xs"
                       >
-                        <div className="w-1.5 h-1.5 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full flex-shrink-0"></div>
-                        <span className="text-purple-200/70">{feature}</span>
+                        <div className="w-1.5 h-1.5 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-full flex-shrink-0"></div>
+                        <span className="text-blue-200/70">{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -282,13 +282,13 @@ const Projects = () => {
 
                 {/* Technologies */}
                 <div>
-                  <h4 className="font-semibold mb-2 text-sm text-yellow-200">Technologies:</h4>
+                  <h4 className="font-semibold mb-2 text-sm text-blue-200">Technologies:</h4>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech, techIndex) => (
                       <Badge
                         key={techIndex}
                         variant="secondary"
-                        className="text-xs bg-purple-950/50 text-purple-200 hover:bg-yellow-500/20 hover:text-yellow-200 transition-all duration-200 border border-purple-500/20"
+                        className="text-xs bg-blue-950/50 text-blue-200 hover:bg-blue-500/20 hover:text-blue-200 transition-all duration-200 border border-blue-500/20"
                       >
                         {tech}
                       </Badge>
@@ -309,7 +309,7 @@ const Projects = () => {
                       <Button
                         size="sm"
                         variant="outline"
-                        className="w-full royal-border bg-transparent text-yellow-200 hover:bg-yellow-500/10 hover:scale-105 hover:shadow-lg transition-all duration-300 group/btn"
+                        className="w-full royal-border bg-transparent text-blue-200 hover:bg-blue-500/10 hover:scale-105 hover:shadow-lg transition-all duration-300 group/btn"
                       >
                         <Github className="mr-2 h-4 w-4 group-hover/btn:rotate-12 transition-transform duration-300" />
                         Code
@@ -326,7 +326,7 @@ const Projects = () => {
                     >
                       <Button
                         size="sm"
-                        className="w-full bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 text-yellow-950 font-semibold hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/30 transition-all duration-300 group/btn"
+                        className="w-full bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 text-white font-semibold hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 group/btn"
                       >
                         <ExternalLink className="mr-2 h-4 w-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300" />
                         Demo
@@ -341,19 +341,19 @@ const Projects = () => {
 
         {/* Call to Action */}
         <div className={`text-center mt-16 ${isVisible ? 'parallax-zoom' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
-          <Card className="royal-card border-yellow-500/20 max-w-2xl mx-auto">
+          <Card className="royal-card border-blue-500/20 max-w-2xl mx-auto">
             <CardContent className="p-8">
               <div className="flex items-center justify-center gap-2 mb-4">
-                <Shield className="h-10 w-10 text-yellow-400" />
-                <Crown className="h-12 w-12 text-yellow-400" />
-                <Shield className="h-10 w-10 text-yellow-400" />
+                <Award className="h-10 w-10 text-blue-400" />
+                <Crown className="h-12 w-12 text-blue-400" />
+                <Award className="h-10 w-10 text-blue-400" />
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-yellow-100">Interested in My Work?</h3>
-              <p className="text-purple-200/70 mb-6">
+              <h3 className="text-2xl font-bold mb-4 text-blue-100">Interested in My Work?</h3>
+              <p className="text-blue-200/70 mb-6">
                 These projects represent my passion for creating innovative solutions. 
                 I'm always excited to discuss new opportunities and collaborations.
               </p>
-              <Button asChild size="lg" className="bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 text-yellow-950 font-semibold shadow-lg shadow-yellow-500/30 hover:scale-105 transition-all">
+              <Button asChild size="lg" className="bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 text-white font-semibold shadow-lg shadow-blue-500/30 hover:scale-105 transition-all">
                 <a 
                   href="https://github.com/DD4universe" 
                   target="_blank" 
