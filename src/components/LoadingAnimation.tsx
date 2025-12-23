@@ -1,12 +1,25 @@
 import { useEffect, useState } from "react";
+import { Crown } from "lucide-react";
 
 const LoadingAnimation = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [phase, setPhase] = useState(0); // 0: title reveal, 1: name reveal, 2: fade out
+  const [phase, setPhase] = useState(0); // 0: blocks build, 1: name reveal, 2: fade out
+  const [blocks, setBlocks] = useState<boolean[]>(Array(12).fill(false));
 
   useEffect(() => {
-    // Phase 0: Title reveal animation (1.5s)
-    const titleTimer = setTimeout(() => setPhase(1), 1500);
+    // Animate blocks building one by one
+    blocks.forEach((_, i) => {
+      setTimeout(() => {
+        setBlocks(prev => {
+          const newBlocks = [...prev];
+          newBlocks[i] = true;
+          return newBlocks;
+        });
+      }, i * 100);
+    });
+
+    // Phase 0: Blocks build (1.2s)
+    const titleTimer = setTimeout(() => setPhase(1), 1200);
     
     // Phase 1: Name reveal animation (2.5s total)
     const nameTimer = setTimeout(() => setPhase(2), 2500);
@@ -24,16 +37,20 @@ const LoadingAnimation = () => {
   if (!isLoading) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black overflow-hidden">
-      {/* Animated background particles */}
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-br from-[#0a0612] via-[#0d0818] to-[#050208] overflow-hidden">
+      {/* Royal animated background particles */}
       <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
+        {[...Array(30)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-primary rounded-full opacity-60"
+            className="absolute rounded-full"
             style={{
+              width: `${Math.random() * 4 + 2}px`,
+              height: `${Math.random() * 4 + 2}px`,
+              background: i % 2 === 0 ? 'linear-gradient(135deg, #ffd700, #ffb347)' : 'linear-gradient(135deg, #9333ea, #7c3aed)',
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
+              opacity: 0.6,
               animation: `float ${3 + Math.random() * 4}s ease-in-out infinite`,
               animationDelay: `${Math.random() * 2}s`
             }}
@@ -41,19 +58,20 @@ const LoadingAnimation = () => {
         ))}
       </div>
 
-      {/* Diagonal speed lines (anime effect) */}
+      {/* Royal diagonal speed lines */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(15)].map((_, i) => (
           <div
             key={i}
-            className={`absolute h-px bg-gradient-to-r from-transparent via-primary to-transparent ${
-              phase >= 2 ? 'opacity-0' : 'opacity-30'
+            className={`absolute h-px ${
+              phase >= 2 ? 'opacity-0' : 'opacity-40'
             }`}
             style={{
               width: '200%',
               top: `${i * 7}%`,
               left: '-100%',
               transform: 'rotate(-25deg)',
+              background: `linear-gradient(90deg, transparent, ${i % 2 === 0 ? '#ffd700' : '#9333ea'}, transparent)`,
               animation: `slideRight ${0.8 + i * 0.05}s ease-out forwards`,
               animationDelay: `${i * 0.05}s`
             }}
@@ -63,39 +81,83 @@ const LoadingAnimation = () => {
 
       {/* Main content container */}
       <div className="relative z-10 flex flex-col items-center">
-        {/* Anime-style title reveal */}
-        <div className="mb-8 overflow-hidden">
+        {/* Block Building Animation */}
+        <div className="mb-8 grid grid-cols-4 gap-2">
+          {blocks.map((visible, i) => (
+            <div
+              key={i}
+              className={`w-8 h-8 rounded-sm transition-all duration-300 ${
+                visible ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
+              }`}
+              style={{
+                background: i % 3 === 0 
+                  ? 'linear-gradient(135deg, #ffd700, #f59e0b)' 
+                  : i % 3 === 1 
+                  ? 'linear-gradient(135deg, #9333ea, #7c3aed)'
+                  : 'linear-gradient(135deg, #3b82f6, #2563eb)',
+                boxShadow: visible ? `0 4px 15px ${i % 3 === 0 ? 'rgba(255, 215, 0, 0.4)' : i % 3 === 1 ? 'rgba(147, 51, 234, 0.4)' : 'rgba(59, 130, 246, 0.4)'}` : 'none',
+                transform: visible ? 'translateY(0) rotate(0deg)' : 'translateY(-50px) rotate(-15deg)',
+                transitionDelay: `${i * 50}ms`
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Royal title reveal with crown */}
+        <div className="mb-4 overflow-hidden flex items-center gap-4">
+          <Crown 
+            className={`w-12 h-12 text-yellow-400 transition-all duration-1000 ${
+              phase >= 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
+            }`}
+            style={{
+              filter: 'drop-shadow(0 0 10px rgba(255, 215, 0, 0.5))'
+            }}
+          />
           <h1 
-            className={`text-7xl md:text-9xl font-bold text-white tracking-wider transition-all duration-1000 ${
+            className={`text-5xl md:text-7xl font-bold tracking-wider transition-all duration-1000 ${
               phase >= 0 ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
             }`}
             style={{
-              textShadow: '0 0 20px rgba(147, 51, 234, 0.5), 0 0 40px rgba(147, 51, 234, 0.3)',
-              fontFamily: 'monospace'
+              background: 'linear-gradient(135deg, #ffd700, #f59e0b, #ffd700)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              textShadow: '0 0 30px rgba(255, 215, 0, 0.3)',
+              fontFamily: 'serif'
             }}
           >
             PORTFOLIO
           </h1>
+          <Crown 
+            className={`w-12 h-12 text-yellow-400 transition-all duration-1000 ${
+              phase >= 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
+            }`}
+            style={{
+              filter: 'drop-shadow(0 0 10px rgba(255, 215, 0, 0.5))'
+            }}
+          />
         </div>
 
-        {/* Name reveal with glitch effect */}
+        {/* Name reveal with royal effect */}
         <div className="relative mb-12">
           <div 
-            className={`text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary via-purple-500 to-blue-500 bg-clip-text text-transparent transition-all duration-700 ${
+            className={`text-4xl md:text-6xl font-bold transition-all duration-700 ${
               phase >= 1 ? 'translate-x-0 opacity-100 scale-100' : 'translate-x-20 opacity-0 scale-90'
             }`}
             style={{
+              background: 'linear-gradient(135deg, #ffd700, #9333ea, #3b82f6)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
               filter: phase >= 1 ? 'none' : 'blur(10px)'
             }}
           >
             DURAI B
           </div>
           
-          {/* Glitch layers */}
+          {/* Royal glitch layers */}
           {phase >= 1 && phase < 2 && (
             <>
               <div 
-                className="absolute inset-0 text-4xl md:text-6xl font-bold text-red-500 opacity-50"
+                className="absolute inset-0 text-4xl md:text-6xl font-bold text-yellow-400 opacity-30"
                 style={{
                   animation: 'glitch1 0.3s infinite',
                   clipPath: 'polygon(0 0, 100% 0, 100% 45%, 0 45%)'
@@ -104,7 +166,7 @@ const LoadingAnimation = () => {
                 DURAI B
               </div>
               <div 
-                className="absolute inset-0 text-4xl md:text-6xl font-bold text-blue-500 opacity-50"
+                className="absolute inset-0 text-4xl md:text-6xl font-bold text-purple-500 opacity-30"
                 style={{
                   animation: 'glitch2 0.3s infinite',
                   clipPath: 'polygon(0 55%, 100% 55%, 100% 100%, 0 100%)'
@@ -116,36 +178,43 @@ const LoadingAnimation = () => {
           )}
         </div>
 
-        {/* Progress bar with anime style */}
+        {/* Royal progress bar */}
         <div 
-          className={`relative w-64 h-1 bg-gray-800 rounded-full overflow-hidden transition-all duration-500 ${
+          className={`relative w-64 h-2 bg-purple-950/50 rounded-full overflow-hidden transition-all duration-500 ${
             phase >= 2 ? 'opacity-0 scale-x-0' : 'opacity-100 scale-x-100'
           }`}
+          style={{
+            boxShadow: '0 0 20px rgba(255, 215, 0, 0.2)'
+          }}
         >
           <div 
-            className="absolute inset-0 bg-gradient-to-r from-primary via-purple-500 to-blue-500"
+            className="absolute inset-0 rounded-full"
             style={{
+              background: 'linear-gradient(90deg, #ffd700, #9333ea, #3b82f6)',
               animation: 'progressFill 2.5s ease-in-out forwards'
             }}
           />
-          {/* Glowing effect */}
+          {/* Royal shimmer effect */}
           <div 
-            className="absolute inset-0 bg-gradient-to-r from-white/50 via-white/30 to-transparent"
+            className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0"
             style={{
               animation: 'shimmerProgress 1.5s infinite'
             }}
           />
         </div>
 
-        {/* Loading text */}
+        {/* Loading text with royal styling */}
         <div 
-          className={`mt-6 text-lg text-gray-400 tracking-widest transition-all duration-500 ${
+          className={`mt-6 text-lg tracking-widest transition-all duration-500 ${
             phase >= 2 ? 'opacity-0' : 'opacity-100'
           }`}
+          style={{
+            color: phase === 0 ? '#ffd700' : phase === 1 ? '#9333ea' : '#22c55e'
+          }}
         >
-          {phase === 0 && 'INITIALIZING...'}
-          {phase === 1 && 'LOADING EXPERIENCE...'}
-          {phase >= 2 && 'READY!'}
+          {phase === 0 && '⚔️ ASSEMBLING BLOCKS...'}
+          {phase === 1 && '👑 PREPARING ROYAL EXPERIENCE...'}
+          {phase >= 2 && '✨ READY!'}
         </div>
       </div>
 

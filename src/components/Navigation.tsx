@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Home, User, Code, GraduationCap, Mail, Bot } from "lucide-react";
+import { Menu, X, Home, User, Code, GraduationCap, Mail, Bot, Crown } from "lucide-react";
 
 interface NavigationProps {
   activePage: string;
@@ -27,14 +27,14 @@ const Navigation = ({ activePage, onPageChange }: NavigationProps) => {
 
   return (
     <>
-      {/* Fixed Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 glass-card border-b border-primary/20 backdrop-blur-lg">
+      {/* Fixed Navigation with Royal styling */}
+      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-gradient-to-r from-purple-950/90 via-[#0d0818]/95 to-purple-950/90 border-b border-yellow-500/20">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <div className="flex items-center gap-3 cursor-pointer transition-all duration-200" onClick={() => handleNavClick("hero")}>
-              <div className="w-10 h-10 rounded-full hero-gradient flex items-center justify-center text-white font-bold">
-                DB
+            {/* Royal Logo */}
+            <div className="flex items-center gap-3 cursor-pointer transition-all duration-200 group" onClick={() => handleNavClick("hero")}>
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 via-amber-500 to-yellow-600 flex items-center justify-center text-yellow-950 font-bold shadow-lg shadow-yellow-500/30 group-hover:scale-110 transition-transform">
+                <Crown className="w-5 h-5" />
               </div>
               <span className="font-bold text-xl text-gradient">Durai B</span>
             </div>
@@ -49,8 +49,8 @@ const Navigation = ({ activePage, onPageChange }: NavigationProps) => {
                   onClick={() => handleNavClick(item.id)}
                   className={`flex items-center gap-2 transition-all duration-200 ${
                     activePage === item.id
-                      ? "bg-primary/20 text-primary"
-                      : "hover:bg-primary/10 hover:text-primary"
+                      ? "bg-yellow-500/20 text-yellow-300 border border-yellow-500/30"
+                      : "text-purple-200 hover:bg-yellow-500/10 hover:text-yellow-300"
                   }`}
                 >
                   {item.icon}
@@ -58,7 +58,7 @@ const Navigation = ({ activePage, onPageChange }: NavigationProps) => {
                 </Button>
               ))}
 
-              {/* Buy Project CTA */}
+              {/* Royal Buy Project CTA */}
               <a
                 href="https://dd-products.vercel.app/"
                 target="_blank"
@@ -67,7 +67,7 @@ const Navigation = ({ activePage, onPageChange }: NavigationProps) => {
               >
                 <Button
                   size="sm"
-                  className="hero-gradient text-white px-4 py-2 hover:scale-105 transition-transform duration-200"
+                  className="bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 text-yellow-950 font-semibold px-4 py-2 hover:scale-105 transition-transform duration-200 shadow-lg shadow-yellow-500/30"
                 >
                   Buy Project
                 </Button>
@@ -78,7 +78,7 @@ const Navigation = ({ activePage, onPageChange }: NavigationProps) => {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="md:hidden text-yellow-300 hover:bg-yellow-500/10"
               onClick={() => setIsOpen(!isOpen)}
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -88,7 +88,7 @@ const Navigation = ({ activePage, onPageChange }: NavigationProps) => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden glass-card border-t border-primary/20">
+          <div className="md:hidden bg-gradient-to-b from-purple-950/95 to-[#0d0818]/98 border-t border-yellow-500/20">
             <div className="container mx-auto px-4 py-4">
               <div className="grid grid-cols-2 gap-2">
                 {navItems.map((item) => (
@@ -99,8 +99,8 @@ const Navigation = ({ activePage, onPageChange }: NavigationProps) => {
                     onClick={() => handleNavClick(item.id)}
                     className={`flex items-center gap-2 justify-start transition-all duration-200 ${
                       activePage === item.id
-                        ? "bg-primary/20 text-primary"
-                        : "hover:bg-primary/10 hover:text-primary"
+                        ? "bg-yellow-500/20 text-yellow-300 border border-yellow-500/30"
+                        : "text-purple-200 hover:bg-yellow-500/10 hover:text-yellow-300"
                     }`}
                   >
                     {item.icon}
@@ -108,7 +108,7 @@ const Navigation = ({ activePage, onPageChange }: NavigationProps) => {
                   </Button>
                 ))}
 
-                {/* Mobile Buy CTA */}
+                {/* Mobile Royal Buy CTA */}
                 <a
                   href="https://dd-products.vercel.app/"
                   target="_blank"
@@ -116,7 +116,7 @@ const Navigation = ({ activePage, onPageChange }: NavigationProps) => {
                   onClick={() => setIsOpen(false)}
                   className="col-span-2 mt-2"
                 >
-                  <Button className="w-full hero-gradient text-white">Buy Project</Button>
+                  <Button className="w-full bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 text-yellow-950 font-semibold shadow-lg shadow-yellow-500/30">Buy Project</Button>
                 </a>
               </div>
             </div>

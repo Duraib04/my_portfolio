@@ -1,9 +1,37 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, Code2 } from "lucide-react";
+import { ExternalLink, Github, Code2, Crown, Sword, Shield } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
 
 const Projects = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const projects = [
     {
       title: "DURAI Document Converter",
@@ -148,29 +176,57 @@ const Projects = () => {
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "Healthcare":
-        return "bg-red-500/20 text-red-400 border-red-500/30";
+        return "bg-rose-500/20 text-rose-300 border-rose-500/40";
       case "Web Development":
-        return "bg-primary/20 text-primary border-primary/30";
+        return "bg-yellow-500/20 text-yellow-300 border-yellow-500/40";
       case "IoT":
-        return "bg-purple-500/20 text-purple-400 border-purple-500/30";
+        return "bg-purple-500/20 text-purple-300 border-purple-500/40";
       case "AI/ML":
-        return "bg-accent/20 text-accent border-accent/30";
+        return "bg-blue-500/20 text-blue-300 border-blue-500/40";
       case "Software":
-        return "bg-green-500/20 text-green-400 border-green-500/30";
+        return "bg-emerald-500/20 text-emerald-300 border-emerald-500/40";
       default:
-        return "bg-secondary/20 text-secondary-foreground border-secondary/30";
+        return "bg-yellow-500/20 text-yellow-300 border-yellow-500/40";
     }
   };
 
   return (
-    <section className="py-20 px-4">
-      <div className="container mx-auto">
+    <section ref={sectionRef} className="py-20 px-4 parallax-section relative overflow-hidden">
+      {/* Royal background decorations */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div 
+          className="absolute top-40 right-20 w-64 h-64 rounded-full bg-yellow-500/5 blur-3xl"
+          style={{ transform: `translateY(${scrollY * 0.15}px)` }}
+        />
+        <div 
+          className="absolute bottom-40 left-20 w-80 h-80 rounded-full bg-purple-500/5 blur-3xl"
+          style={{ transform: `translateY(${scrollY * -0.15}px)` }}
+        />
+        {/* Decorative blocks */}
+        {[...Array(8)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-3 h-3 bg-gradient-to-br from-yellow-400/20 to-amber-600/10 rounded-sm rotate-45"
+            style={{
+              left: `${10 + i * 12}%`,
+              top: `${15 + (i % 4) * 20}%`,
+              transform: `translateY(${scrollY * (0.05 + i * 0.02)}px) rotate(45deg)`
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="container mx-auto relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
-            Featured Projects
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+        <div className={`text-center mb-16 ${isVisible ? 'parallax-up' : 'opacity-0'}`}>
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <Sword className="w-8 h-8 text-yellow-400 rotate-[-45deg]" />
+            <h2 className="text-4xl md:text-5xl font-bold text-gradient">
+              Featured Projects
+            </h2>
+            <Sword className="w-8 h-8 text-yellow-400 rotate-45" />
+          </div>
+          <p className="text-xl text-purple-200/70 max-w-3xl mx-auto">
             A comprehensive portfolio of innovative projects spanning healthcare, IoT ecosystems, 
             smart home automation, industrial solutions, and full-stack web development
           </p>
@@ -181,7 +237,10 @@ const Projects = () => {
           {projects.map((project, index) => (
             <Card
               key={index}
-              className="glass-card border-primary/20 hover:border-primary/40 transition-all duration-200 group"
+              className={`royal-card border-yellow-500/20 hover:border-yellow-400/40 transition-all duration-300 group hover:shadow-lg hover:shadow-yellow-500/10 ${
+                isVisible ? 'animate-block-build' : 'opacity-0'
+              }`}
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
               <CardHeader>
                 <div className="flex justify-between items-start mb-2">
@@ -192,30 +251,30 @@ const Projects = () => {
                     {project.status}
                   </Badge>
                 </div>
-                <CardTitle className="text-xl">
+                <CardTitle className="text-xl text-yellow-100 group-hover:text-yellow-300 transition-colors">
                   {project.title}
                 </CardTitle>
-                <Badge variant="outline" className="w-fit text-xs">
+                <Badge variant="outline" className="w-fit text-xs border-purple-500/30 text-purple-300">
                   {project.type}
                 </Badge>
               </CardHeader>
               <CardContent className="space-y-4">
                 {/* Description */}
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <p className="text-purple-200/70 text-sm leading-relaxed">
                   {project.description}
                 </p>
 
                 {/* Features */}
                 <div>
-                  <h4 className="font-semibold mb-2 text-sm">Key Features:</h4>
+                  <h4 className="font-semibold mb-2 text-sm text-yellow-200">Key Features:</h4>
                   <div className="grid grid-cols-2 gap-1">
                     {project.features.map((feature, featureIndex) => (
                       <div
                         key={featureIndex}
                         className="flex items-center gap-2 text-xs"
                       >
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full flex-shrink-0"></div>
-                        <span className="text-muted-foreground">{feature}</span>
+                        <div className="w-1.5 h-1.5 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full flex-shrink-0"></div>
+                        <span className="text-purple-200/70">{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -223,13 +282,13 @@ const Projects = () => {
 
                 {/* Technologies */}
                 <div>
-                  <h4 className="font-semibold mb-2 text-sm">Technologies:</h4>
+                  <h4 className="font-semibold mb-2 text-sm text-yellow-200">Technologies:</h4>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech, techIndex) => (
                       <Badge
                         key={techIndex}
                         variant="secondary"
-                        className="text-xs bg-secondary/50 hover:bg-primary/20 transition-all duration-200"
+                        className="text-xs bg-purple-950/50 text-purple-200 hover:bg-yellow-500/20 hover:text-yellow-200 transition-all duration-200 border border-purple-500/20"
                       >
                         {tech}
                       </Badge>
@@ -250,7 +309,7 @@ const Projects = () => {
                       <Button
                         size="sm"
                         variant="outline"
-                        className="w-full glass-card border-primary/30 hover:bg-primary/10 hover:scale-105 hover:shadow-lg hover:border-primary transition-all duration-300 group/btn"
+                        className="w-full royal-border bg-transparent text-yellow-200 hover:bg-yellow-500/10 hover:scale-105 hover:shadow-lg transition-all duration-300 group/btn"
                       >
                         <Github className="mr-2 h-4 w-4 group-hover/btn:rotate-12 transition-transform duration-300" />
                         Code
@@ -267,7 +326,7 @@ const Projects = () => {
                     >
                       <Button
                         size="sm"
-                        className="w-full hero-gradient text-white hover:scale-105 hover:shadow-2xl hover:shadow-primary/50 transition-all duration-300 group/btn"
+                        className="w-full bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 text-yellow-950 font-semibold hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/30 transition-all duration-300 group/btn"
                       >
                         <ExternalLink className="mr-2 h-4 w-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300" />
                         Demo
@@ -281,29 +340,31 @@ const Projects = () => {
         </div>
 
         {/* Call to Action */}
-        {/* Call to Action */}
-<div className="text-center mt-16">
-  <Card className="glass-card border-primary/20 max-w-2xl mx-auto">
-    <CardContent className="p-8">
-      <Code2 className="h-12 w-12 text-primary mx-auto mb-4" />
-      <h3 className="text-2xl font-bold mb-4">Interested in My Work?</h3>
-      <p className="text-muted-foreground mb-6">
-        These projects represent my passion for creating innovative solutions. 
-        I'm always excited to discuss new opportunities and collaborations.
-      </p>
-      <Button asChild size="lg" className="hero-gradient text-white glow-primary">
-        <a 
-          href="https://github.com/DD4universe" 
-          target="_blank" 
-          rel="noopener noreferrer"
-        >
-          View All Projects
-        </a>
-      </Button>
-    </CardContent>
-  </Card>
-</div>
-
+        <div className={`text-center mt-16 ${isVisible ? 'parallax-zoom' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
+          <Card className="royal-card border-yellow-500/20 max-w-2xl mx-auto">
+            <CardContent className="p-8">
+              <div className="flex items-center justify-center gap-2 mb-4">
+                <Shield className="h-10 w-10 text-yellow-400" />
+                <Crown className="h-12 w-12 text-yellow-400" />
+                <Shield className="h-10 w-10 text-yellow-400" />
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-yellow-100">Interested in My Work?</h3>
+              <p className="text-purple-200/70 mb-6">
+                These projects represent my passion for creating innovative solutions. 
+                I'm always excited to discuss new opportunities and collaborations.
+              </p>
+              <Button asChild size="lg" className="bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 text-yellow-950 font-semibold shadow-lg shadow-yellow-500/30 hover:scale-105 transition-all">
+                <a 
+                  href="https://github.com/DD4universe" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  View All Projects
+                </a>
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </section>
   );
