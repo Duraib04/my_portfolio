@@ -8,7 +8,6 @@ import Education from "@/components/Education";
 import PersonalChatAgent from "@/components/PersonalChatAgent";
 import Contact from "@/components/Contact";
 import FloatingChatWidget from "@/components/FloatingChatWidget";
-import MinecraftBackground from "@/components/MinecraftBackground";
 
 const Index = () => {
   const [activePage, setActivePage] = useState("hero");
@@ -50,10 +49,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen relative">
-      {/* Minecraft World Background */}
-      <MinecraftBackground />
-      
+    <div className="min-h-screen relative bg-gradient-to-br from-[#0a0a1a] via-[#0d1025] to-[#050510]">
       <Navigation activePage={activePage} onPageChange={handlePageChange} />
       
       <main className="min-h-[calc(100vh-8rem)] relative z-10">
