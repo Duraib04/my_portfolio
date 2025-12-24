@@ -8,6 +8,7 @@ import Education from "@/components/Education";
 import PersonalChatAgent from "@/components/PersonalChatAgent";
 import Contact from "@/components/Contact";
 import FloatingChatWidget from "@/components/FloatingChatWidget";
+import MinecraftBackground from "@/components/MinecraftBackground";
 
 const Index = () => {
   const [activePage, setActivePage] = useState("hero");
@@ -49,15 +50,18 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
+      {/* Minecraft World Background */}
+      <MinecraftBackground />
+      
       <Navigation activePage={activePage} onPageChange={handlePageChange} />
       
-      <main className="min-h-[calc(100vh-8rem)]">
+      <main className="min-h-[calc(100vh-8rem)] relative z-10">
         {renderPage()}
       </main>
       
       {/* Footer */}
-      <footer className="py-8 px-4 border-t border-primary/20 glass-card">
+      <footer className="py-8 px-4 border-t border-primary/20 glass-card relative z-10">
         <div className="container mx-auto text-center">
           <p className="text-muted-foreground">
             © 2024 Durai B. Built with passion and modern web technologies.
