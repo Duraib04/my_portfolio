@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Home, User, Code, GraduationCap, Mail, Bot, Crown } from "lucide-react";
+import { Menu, X, Home, User, Code, GraduationCap, Mail, Bot } from "lucide-react";
 
 interface NavigationProps {
   activePage: string;
@@ -31,10 +31,10 @@ const Navigation = ({ activePage, onPageChange }: NavigationProps) => {
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-gradient-to-r from-blue-950/90 via-[#0a0a1a]/95 to-blue-950/90 border-b border-blue-500/20">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            {/* Royal Logo */}
+            {/* Logo */}
             <div className="flex items-center gap-3 cursor-pointer transition-all duration-200 group" onClick={() => handleNavClick("hero")}>
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 via-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/30 group-hover:scale-110 transition-transform">
-                <Crown className="w-5 h-5" />
+                <span className="text-lg">D</span>
               </div>
               <span className="font-bold text-xl text-gradient">Durai B</span>
             </div>
@@ -58,7 +58,7 @@ const Navigation = ({ activePage, onPageChange }: NavigationProps) => {
                 </Button>
               ))}
 
-              {/* Royal Buy Project CTA */}
+              {/* Buy Project CTA */}
               <a
                 href="https://dd-products.vercel.app/"
                 target="_blank"

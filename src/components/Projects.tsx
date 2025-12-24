@@ -1,37 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, Code2, Crown, Star, Award } from "lucide-react";
-import { useEffect, useState, useRef } from "react";
+import { ExternalLink, Github } from "lucide-react";
 
 const Projects = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
   const projects = [
     {
       title: "DURAI Document Converter",
@@ -191,41 +163,13 @@ const Projects = () => {
   };
 
   return (
-    <section ref={sectionRef} className="py-20 px-4 parallax-section relative overflow-hidden">
-      {/* Royal background decorations */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div 
-          className="absolute top-40 right-20 w-64 h-64 rounded-full bg-blue-500/5 blur-3xl"
-          style={{ transform: `translateY(${scrollY * 0.15}px)` }}
-        />
-        <div 
-          className="absolute bottom-40 left-20 w-80 h-80 rounded-full bg-indigo-500/5 blur-3xl"
-          style={{ transform: `translateY(${scrollY * -0.15}px)` }}
-        />
-        {/* Decorative blocks */}
-        {[...Array(8)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-3 h-3 bg-gradient-to-br from-blue-400/20 to-indigo-600/10 rounded-sm rotate-45"
-            style={{
-              left: `${10 + i * 12}%`,
-              top: `${15 + (i % 4) * 20}%`,
-              transform: `translateY(${scrollY * (0.05 + i * 0.02)}px) rotate(45deg)`
-            }}
-          />
-        ))}
-      </div>
-
+    <section className="py-20 px-4 relative overflow-hidden">
       <div className="container mx-auto relative z-10">
         {/* Header */}
-        <div className={`text-center mb-16 ${isVisible ? 'parallax-up' : 'opacity-0'}`}>
-          <div className="flex items-center justify-center gap-4 mb-4">
-            <Star className="w-8 h-8 text-blue-400" />
-            <h2 className="text-4xl md:text-5xl font-bold text-gradient">
-              Featured Projects
-            </h2>
-            <Star className="w-8 h-8 text-blue-400" />
-          </div>
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-gradient mb-4">
+            Featured Projects
+          </h2>
           <p className="text-xl text-blue-200/70 max-w-3xl mx-auto">
             A comprehensive portfolio of innovative projects spanning healthcare, IoT ecosystems, 
             smart home automation, industrial solutions, and full-stack web development
@@ -237,10 +181,7 @@ const Projects = () => {
           {projects.map((project, index) => (
             <Card
               key={index}
-              className={`royal-card border-blue-500/20 hover:border-blue-400/40 transition-all duration-300 group hover:shadow-lg hover:shadow-blue-500/10 ${
-                isVisible ? 'animate-block-build' : 'opacity-0'
-              }`}
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="glass-card border-blue-500/20 hover:border-blue-400/40 transition-all duration-300 group hover:shadow-lg hover:shadow-blue-500/10"
             >
               <CardHeader>
                 <div className="flex justify-between items-start mb-2">
@@ -340,14 +281,9 @@ const Projects = () => {
         </div>
 
         {/* Call to Action */}
-        <div className={`text-center mt-16 ${isVisible ? 'parallax-zoom' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
-          <Card className="royal-card border-blue-500/20 max-w-2xl mx-auto">
+        <div className="text-center mt-16">
+          <Card className="glass-card border-blue-500/20 max-w-2xl mx-auto">
             <CardContent className="p-8">
-              <div className="flex items-center justify-center gap-2 mb-4">
-                <Award className="h-10 w-10 text-blue-400" />
-                <Crown className="h-12 w-12 text-blue-400" />
-                <Award className="h-10 w-10 text-blue-400" />
-              </div>
               <h3 className="text-2xl font-bold mb-4 text-blue-100">Interested in My Work?</h3>
               <p className="text-blue-200/70 mb-6">
                 These projects represent my passion for creating innovative solutions. 
