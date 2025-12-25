@@ -5,14 +5,14 @@ const LoadingAnimation = () => {
   const [phase, setPhase] = useState(0); // 0: title reveal, 1: name reveal, 2: fade out
 
   useEffect(() => {
-    // Phase 0: Title reveal animation (1.5s)
-    const titleTimer = setTimeout(() => setPhase(1), 1500);
+    // Phase 0: Title reveal animation (~0.9s)
+    const titleTimer = setTimeout(() => setPhase(1), 900);
     
-    // Phase 1: Name reveal animation (2.5s total)
-    const nameTimer = setTimeout(() => setPhase(2), 2500);
+    // Phase 1: Name reveal animation (~1.9s total)
+    const nameTimer = setTimeout(() => setPhase(2), 1900);
     
-    // Phase 2: Fade out and complete (3.5s total)
-    const completeTimer = setTimeout(() => setIsLoading(false), 3500);
+    // Phase 2: Fade out and complete (~3.0s total)
+    const completeTimer = setTimeout(() => setIsLoading(false), 3000);
 
     return () => {
       clearTimeout(titleTimer);
@@ -125,7 +125,7 @@ const LoadingAnimation = () => {
           <div 
             className="absolute inset-0 bg-gradient-to-r from-primary via-purple-500 to-blue-500"
             style={{
-              animation: 'progressFill 2.5s ease-in-out forwards'
+              animation: 'progressFill 2.2s ease-in-out forwards'
             }}
           />
           {/* Glowing effect */}
