@@ -20,7 +20,7 @@ function FloatingName() {
       <Text
         ref={textRef}
         fontSize={1.2}
-        color="#60a5fa"
+        color="#f2c14f"
         anchorX="center"
         anchorY="middle"
       >
@@ -105,7 +105,7 @@ function Particles() {
       </bufferGeometry>
       <pointsMaterial
         size={0.05}
-        color="#60a5fa"
+        color="#f2c14f"
         transparent
         opacity={0.6}
         sizeAttenuation
@@ -128,8 +128,8 @@ function Portal() {
   return (
     <Sphere ref={sphereRef} args={[0.5, 32, 32] as const} position={[0, 0, 0] as const}>
       <meshStandardMaterial
-        color="#8b5cf6"
-        emissive="#8b5cf6"
+        color="#8f70ff"
+        emissive="#8f70ff"
         emissiveIntensity={0.5}
         wireframe
         transparent
@@ -154,7 +154,7 @@ function Scene() {
       <ambientLight intensity={1} />
       <directionalLight position={[5, 5, 5] as const} intensity={2} />
       <pointLight position={[10, 10, 10] as const} intensity={2} />
-      <pointLight position={[-10, -10, -10] as const} intensity={1} color="#8b5cf6" />
+      <pointLight position={[-10, -10, -10] as const} intensity={1} color="#f2c14f" />
 
       {/* Stars background */}
       <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
@@ -165,12 +165,12 @@ function Scene() {
       <Particles />
 
       {/* Skill cubes arranged in a circle */}
-      <SkillCube position={[3, 1, -2] as const} color="#60a5fa" label="React" />
-      <SkillCube position={[-3, 1, -2] as const} color="#8b5cf6" label="Node.js" />
-      <SkillCube position={[3, -1, -2] as const} color="#ec4899" label="Python" />
-      <SkillCube position={[-3, -1, -2] as const} color="#f59e0b" label="AWS" />
-      <SkillCube position={[0, 2, -2] as const} color="#10b981" label="TypeScript" />
-      <SkillCube position={[0, -2, -2] as const} color="#ef4444" label="AI/ML" />
+      <SkillCube position={[3, 1, -2] as const} color="#8f70ff" label="React" />
+      <SkillCube position={[-3, 1, -2] as const} color="#f2c14f" label="Node.js" />
+      <SkillCube position={[3, -1, -2] as const} color="#5b7bff" label="Python" />
+      <SkillCube position={[-3, -1, -2] as const} color="#c084fc" label="AWS" />
+      <SkillCube position={[0, 2, -2] as const} color="#7dd3fc" label="TypeScript" />
+      <SkillCube position={[0, -2, -2] as const} color="#d946ef" label="AI/ML" />
     </>
   );
 }
@@ -189,7 +189,7 @@ export default function GameIntro({ onEnter }: GameIntroProps) {
   }, []);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-gradient-to-b from-gray-900 via-purple-900 to-gray-900">
+    <div className="relative w-full h-screen overflow-hidden bg-gradient-to-b from-[#0b1026] via-[#1b0f35] to-[#0a081a]">
       {/* 3D Canvas */}
       <Canvas
         className="absolute inset-0"

@@ -24,7 +24,7 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-          <Suspense fallback={<div className="min-h-screen bg-gradient-to-b from-gray-900 via-purple-900 to-gray-900" />}>
+          <Suspense fallback={<div className="min-h-screen bg-gradient-to-b from-[#0b1026] via-[#1b0f35] to-[#0a081a]" />}>
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/about" element={<AboutPage />} />

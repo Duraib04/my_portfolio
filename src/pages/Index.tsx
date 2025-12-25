@@ -49,7 +49,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen relative bg-gradient-to-br from-[#0a0a1a] via-[#0d1025] to-[#050510]">
+    <div className="min-h-screen relative bg-gradient-to-br from-[#0b1026] via-[#1b0f35] to-[#0a081a]">
       <Navigation activePage={activePage} onPageChange={handlePageChange} />
       
       <main className="min-h-[calc(100vh-8rem)] relative z-10">

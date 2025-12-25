@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Award, Star } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
 
 const Skills = () => {
   const skillCategories = [
@@ -92,27 +92,27 @@ const Skills = () => {
   ];
 
   const getSkillColor = (level: number) => {
-    if (level >= 80) return "bg-gradient-to-r from-blue-500 to-indigo-500";
-    if (level >= 70) return "bg-gradient-to-r from-blue-400 to-blue-600";
-    return "bg-gradient-to-r from-slate-400 to-blue-400";
+    if (level >= 80) return "bg-primary";
+    if (level >= 70) return "bg-accent";
+    return "bg-secondary";
   };
 
   const getCertificationColor = (type: string) => {
     switch (type) {
-      case "AI/ML": return "bg-indigo-500/20 text-indigo-300 border-indigo-500/40";
-      case "Web Dev": return "bg-blue-500/20 text-blue-300 border-blue-500/40";
-      case "Programming": return "bg-emerald-500/20 text-emerald-300 border-emerald-500/40";
-      case "Hardware": return "bg-amber-500/20 text-amber-300 border-amber-500/40";
-      default: return "bg-blue-500/20 text-blue-300 border-blue-500/40";
+      case "AI/ML": return "bg-accent/20 text-accent border-accent/30";
+      case "Web Dev": return "bg-primary/20 text-primary border-primary/30";
+      case "Programming": return "bg-green-500/20 text-green-400 border-green-500/30";
+      case "Hardware": return "bg-orange-500/20 text-orange-400 border-orange-500/30";
+      default: return "bg-secondary/20 text-secondary-foreground border-secondary/30";
     }
   };
 
   return (
-    <section className="py-20 px-4 relative overflow-hidden">
-      <div className="container mx-auto relative z-10">
+    <section className="py-20 px-4">
+      <div className="container mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gradient mb-4">Skills & Expertise</h2>
-          <p className="text-xl text-blue-200/70 max-w-3xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">Skills & Expertise</h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             A comprehensive skill set spanning web development, programming, and emerging technologies
           </p>
         </div>
@@ -122,24 +122,25 @@ const Skills = () => {
           {skillCategories.map((category, categoryIndex) => (
             <Card 
               key={categoryIndex} 
-              className="glass-card border-blue-500/20 hover:border-blue-400/40 transition-all duration-300"
+              className="glass-card border-primary/20 hover:border-primary/40 transition-all duration-200 group"
             >
               <CardHeader>
-                <CardTitle className="text-xl text-blue-300">
-                  {category.title}
-                </CardTitle>
+                <CardTitle className="text-xl text-primary">{category.title}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 {category.skills.map((skill, skillIndex) => (
-                  <div key={skillIndex} className="space-y-2">
+                  <div 
+                    key={skillIndex} 
+                    className="space-y-2"
+                  >
                     <div className="flex justify-between items-center">
-                      <span className="font-medium text-blue-100/90">{skill.name}</span>
-                      <span className="text-sm text-blue-400 font-bold">{skill.level}%</span>
+                      <span className="font-medium">{skill.name}</span>
+                      <span className="text-sm text-muted-foreground font-bold">{skill.level}%</span>
                     </div>
-                    <div className="relative h-2 bg-blue-950/50 rounded overflow-hidden">
-                      <div 
-                        className={`h-full ${getSkillColor(skill.level)} rounded`}
-                        style={{ width: `${skill.level}%` }}
+                    <div className="relative">
+                      <Progress 
+                        value={skill.level} 
+                        className="h-2"
                       />
                     </div>
                   </div>
@@ -150,32 +151,25 @@ const Skills = () => {
         </div>
 
         {/* Certifications */}
-        <Card className="glass-card border-blue-500/20">
+        <Card className="glass-card border-primary/20 hover:border-primary/40 transition-all duration-200 group">
           <CardHeader>
-            <CardTitle className="text-2xl text-center flex items-center justify-center gap-3">
-              <Award className="w-6 h-6 text-blue-400" />
-              <span className="text-gradient">Certifications</span>
-              <Award className="w-6 h-6 text-blue-400" />
-            </CardTitle>
+            <CardTitle className="text-2xl text-center text-gradient">Certifications</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {certifications.map((cert, index) => (
                 <div 
                   key={index}
-                  className="p-4 rounded-lg bg-blue-950/30 hover:bg-blue-500/10 transition-all duration-300 cursor-pointer border border-blue-500/10 hover:border-blue-400/40"
+                  className="p-4 rounded-lg bg-secondary/30 hover:bg-primary/10 transition-all duration-200 cursor-pointer border border-transparent hover:border-primary/30"
                 >
                   <div className="flex justify-between items-start mb-2">
                     <Badge className={`${getCertificationColor(cert.type)}`}>
                       {cert.type}
                     </Badge>
-                    <span className="text-xs text-blue-400/70 font-semibold flex items-center gap-1">
-                      <Star className="w-3 h-3" />
-                      {cert.date}
-                    </span>
+                    <span className="text-xs text-muted-foreground font-semibold">{cert.date}</span>
                   </div>
-                  <h4 className="font-semibold text-sm mb-1 leading-tight text-blue-100">{cert.title}</h4>
-                  <p className="text-xs text-blue-300/70">{cert.organization}</p>
+                  <h4 className="font-semibold text-sm mb-1 leading-tight">{cert.title}</h4>
+                  <p className="text-xs text-muted-foreground">{cert.organization}</p>
                 </div>
               ))}
             </div>

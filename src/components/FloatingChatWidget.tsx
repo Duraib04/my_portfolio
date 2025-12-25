@@ -202,7 +202,7 @@ const FloatingChatWidget = () => {
               }
             }}
             size="lg"
-            className="h-16 w-16 rounded-full shadow-2xl bg-gradient-to-br from-gray-900 via-gray-800 to-black border-2 border-gray-700 hover:border-primary hover:scale-110 transition-all duration-300 group relative overflow-hidden"
+            className="h-16 w-16 rounded-full shadow-2xl bg-gradient-to-br from-[#0b1026] via-[#120c2c] to-[#0a081a] border-2 border-primary/30 hover:border-accent hover:scale-110 transition-all duration-300 group relative overflow-hidden"
           >
             <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-primary/10 to-transparent group-hover:via-primary/20 transition-all duration-300"></div>
             <Bot className="h-8 w-8 text-primary relative z-10 group-hover:scale-110 transition-transform duration-300" />
@@ -229,9 +229,9 @@ const FloatingChatWidget = () => {
         top: `${position.y}px`
       }}
     >
-      <Card className={`w-80 ${isMinimized ? 'h-16' : 'h-96'} glass-card border-primary/20 shadow-2xl transition-all duration-300`}>
+      <Card className={`w-80 ${isMinimized ? 'h-16' : 'h-96'} glass-card border-primary/25 shadow-2xl transition-all duration-300`}>
         <CardHeader 
-          className="pb-2 bg-gradient-to-r from-gray-900 to-gray-800 border-b border-gray-700 cursor-grab active:cursor-grabbing select-none"
+          className="pb-2 bg-gradient-to-r from-[#0b1026] via-[#120c2c] to-[#1b0f35] border-b border-primary/25 cursor-grab active:cursor-grabbing select-none"
           onMouseDown={handleMouseDown}
         >
           <CardTitle className="flex items-center justify-between text-sm pointer-events-none">
@@ -297,9 +297,9 @@ const FloatingChatWidget = () => {
                       message.sender === "user" ? "text-right" : ""
                     }`}>
                       <div className={`p-2 rounded-lg text-xs ${
-                        message.sender === "user"
-                          ? "bg-primary/20 ml-auto"
-                          : "bg-gradient-to-br from-gray-800 to-gray-900 border border-purple-500/30 text-white"
+                        message.sender === "user" 
+                          ? "bg-primary/25 ml-auto"
+                          : "bg-gradient-to-br from-[#0f1430] to-[#120c2c] border border-primary/25 text-white"
                       }`}>
                         <p className="leading-relaxed whitespace-pre-line">{message.text}</p>
                       </div>

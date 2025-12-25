@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, Code2 } from "lucide-react";
 
 const Projects = () => {
   const projects = [
@@ -148,29 +148,29 @@ const Projects = () => {
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "Healthcare":
-        return "bg-rose-500/20 text-rose-300 border-rose-500/40";
+        return "bg-red-500/20 text-red-400 border-red-500/30";
       case "Web Development":
-        return "bg-blue-500/20 text-blue-300 border-blue-500/40";
+        return "bg-primary/20 text-primary border-primary/30";
       case "IoT":
-        return "bg-indigo-500/20 text-indigo-300 border-indigo-500/40";
+        return "bg-purple-500/20 text-purple-400 border-purple-500/30";
       case "AI/ML":
-        return "bg-cyan-500/20 text-cyan-300 border-cyan-500/40";
+        return "bg-accent/20 text-accent border-accent/30";
       case "Software":
-        return "bg-emerald-500/20 text-emerald-300 border-emerald-500/40";
+        return "bg-green-500/20 text-green-400 border-green-500/30";
       default:
-        return "bg-blue-500/20 text-blue-300 border-blue-500/40";
+        return "bg-secondary/20 text-secondary-foreground border-secondary/30";
     }
   };
 
   return (
-    <section className="py-20 px-4 relative overflow-hidden">
-      <div className="container mx-auto relative z-10">
+    <section className="py-20 px-4">
+      <div className="container mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gradient mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
             Featured Projects
           </h2>
-          <p className="text-xl text-blue-200/70 max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             A comprehensive portfolio of innovative projects spanning healthcare, IoT ecosystems, 
             smart home automation, industrial solutions, and full-stack web development
           </p>
@@ -181,7 +181,7 @@ const Projects = () => {
           {projects.map((project, index) => (
             <Card
               key={index}
-              className="glass-card border-blue-500/20 hover:border-blue-400/40 transition-all duration-300 group hover:shadow-lg hover:shadow-blue-500/10"
+              className="glass-card border-primary/20 hover:border-primary/40 transition-all duration-200 group"
             >
               <CardHeader>
                 <div className="flex justify-between items-start mb-2">
@@ -192,30 +192,30 @@ const Projects = () => {
                     {project.status}
                   </Badge>
                 </div>
-                <CardTitle className="text-xl text-blue-100 group-hover:text-blue-300 transition-colors">
+                <CardTitle className="text-xl">
                   {project.title}
                 </CardTitle>
-                <Badge variant="outline" className="w-fit text-xs border-blue-500/30 text-blue-300">
+                <Badge variant="outline" className="w-fit text-xs">
                   {project.type}
                 </Badge>
               </CardHeader>
               <CardContent className="space-y-4">
                 {/* Description */}
-                <p className="text-blue-200/70 text-sm leading-relaxed">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   {project.description}
                 </p>
 
                 {/* Features */}
                 <div>
-                  <h4 className="font-semibold mb-2 text-sm text-blue-200">Key Features:</h4>
+                  <h4 className="font-semibold mb-2 text-sm">Key Features:</h4>
                   <div className="grid grid-cols-2 gap-1">
                     {project.features.map((feature, featureIndex) => (
                       <div
                         key={featureIndex}
                         className="flex items-center gap-2 text-xs"
                       >
-                        <div className="w-1.5 h-1.5 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-full flex-shrink-0"></div>
-                        <span className="text-blue-200/70">{feature}</span>
+                        <div className="w-1.5 h-1.5 bg-primary rounded-full flex-shrink-0"></div>
+                        <span className="text-muted-foreground">{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -223,13 +223,13 @@ const Projects = () => {
 
                 {/* Technologies */}
                 <div>
-                  <h4 className="font-semibold mb-2 text-sm text-blue-200">Technologies:</h4>
+                  <h4 className="font-semibold mb-2 text-sm">Technologies:</h4>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech, techIndex) => (
                       <Badge
                         key={techIndex}
                         variant="secondary"
-                        className="text-xs bg-blue-950/50 text-blue-200 hover:bg-blue-500/20 hover:text-blue-200 transition-all duration-200 border border-blue-500/20"
+                        className="text-xs bg-secondary/50 hover:bg-primary/20 transition-all duration-200"
                       >
                         {tech}
                       </Badge>
@@ -250,7 +250,7 @@ const Projects = () => {
                       <Button
                         size="sm"
                         variant="outline"
-                        className="w-full royal-border bg-transparent text-blue-200 hover:bg-blue-500/10 hover:scale-105 hover:shadow-lg transition-all duration-300 group/btn"
+                        className="w-full glass-card border-primary/30 hover:bg-primary/10 hover:scale-105 hover:shadow-lg hover:border-primary transition-all duration-300 group/btn"
                       >
                         <Github className="mr-2 h-4 w-4 group-hover/btn:rotate-12 transition-transform duration-300" />
                         Code
@@ -267,7 +267,7 @@ const Projects = () => {
                     >
                       <Button
                         size="sm"
-                        className="w-full bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 text-white font-semibold hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 group/btn"
+                        className="w-full hero-gradient text-white hover:scale-105 hover:shadow-2xl hover:shadow-primary/50 transition-all duration-300 group/btn"
                       >
                         <ExternalLink className="mr-2 h-4 w-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300" />
                         Demo
@@ -281,26 +281,29 @@ const Projects = () => {
         </div>
 
         {/* Call to Action */}
-        <div className="text-center mt-16">
-          <Card className="glass-card border-blue-500/20 max-w-2xl mx-auto">
-            <CardContent className="p-8">
-              <h3 className="text-2xl font-bold mb-4 text-blue-100">Interested in My Work?</h3>
-              <p className="text-blue-200/70 mb-6">
-                These projects represent my passion for creating innovative solutions. 
-                I'm always excited to discuss new opportunities and collaborations.
-              </p>
-              <Button asChild size="lg" className="bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 text-white font-semibold shadow-lg shadow-blue-500/30 hover:scale-105 transition-all">
-                <a 
-                  href="https://github.com/DD4universe" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  View All Projects
-                </a>
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
+        {/* Call to Action */}
+<div className="text-center mt-16">
+  <Card className="glass-card border-primary/20 max-w-2xl mx-auto">
+    <CardContent className="p-8">
+      <Code2 className="h-12 w-12 text-primary mx-auto mb-4" />
+      <h3 className="text-2xl font-bold mb-4">Interested in My Work?</h3>
+      <p className="text-muted-foreground mb-6">
+        These projects represent my passion for creating innovative solutions. 
+        I'm always excited to discuss new opportunities and collaborations.
+      </p>
+      <Button asChild size="lg" className="hero-gradient text-white glow-primary">
+        <a 
+          href="https://github.com/DD4universe" 
+          target="_blank" 
+          rel="noopener noreferrer"
+        >
+          View All Projects
+        </a>
+      </Button>
+    </CardContent>
+  </Card>
+</div>
+
       </div>
     </section>
   );

@@ -271,8 +271,8 @@ const AIChat = () => {
           </p>
         </div>
 
-        <Card className="glass-card border-primary/20 glow-primary bg-gradient-to-br from-gray-900/50 to-black/50">
-          <CardHeader className="bg-gradient-to-r from-gray-900 to-gray-800 border-b border-gray-700">
+        <Card className="glass-card border-primary/25 glow-primary bg-gradient-to-br from-[#0b1026]/70 to-[#1b0f35]/85">
+          <CardHeader className="bg-gradient-to-r from-[#0b1026] via-[#120c2c] to-[#1b0f35] border-b border-primary/25">
             <CardTitle className="flex items-center gap-3">
               <div className="w-12 h-12 bg-gradient-to-br from-gray-800 to-black rounded-full shadow-lg flex items-center justify-center border-2 border-primary/30 hover:scale-110 transition-transform duration-300">
                 <Bot className="h-6 w-6 text-primary" />
@@ -317,11 +317,11 @@ const AIChat = () => {
                     message.sender === "user" ? "text-right" : ""
                   }`}>
                     <div className={`p-4 rounded-lg ${
-                      message.sender === "user"
-                        ? "bg-gradient-to-r from-primary/20 to-blue-600/20 border border-primary/30 ml-auto"
+                      message.sender === "user" 
+                        ? "bg-gradient-to-r from-primary/25 to-accent/20 border border-primary/30 ml-auto"
                         : message.type === "suggestion"
-                        ? "bg-gradient-to-r from-gray-800 to-gray-900 border-2 border-purple-400/40 text-white"
-                        : "bg-gradient-to-br from-gray-800 to-gray-900 border border-purple-500/30 text-white"
+                        ? "bg-gradient-to-r from-[#0f1430] to-[#120c2c] border-2 border-accent/35 text-white"
+                        : "bg-gradient-to-br from-[#0f1430] to-[#120c2c] border border-primary/25 text-white"
                     }`}>
                       <p className="text-sm leading-relaxed whitespace-pre-line">{message.text}</p>
                     </div>
@@ -338,7 +338,7 @@ const AIChat = () => {
                   <div className="w-10 h-10 bg-gradient-to-br from-gray-800 to-black rounded-full shadow-lg flex items-center justify-center border-2 border-primary/30">
                     <Bot className="h-5 w-5 text-primary animate-pulse" />
                   </div>
-                  <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-primary/30 text-white p-4 rounded-lg">
+                  <div className="bg-gradient-to-br from-[#0f1430] to-[#120c2c] border border-primary/30 text-white p-4 rounded-lg">
                     <div className="flex gap-1 items-center">
                       <span className="text-sm text-primary/70 mr-2">Processing...</span>
                       <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
