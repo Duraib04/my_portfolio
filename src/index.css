@@ -206,6 +206,47 @@
     }
   }
 
+  /* Morphing blob backdrop for hero roles */
+  .morph-blob {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 46% 54% 52% 48% / 60% 38% 62% 40%;
+    background: radial-gradient(circle at 30% 30%, hsl(43 92% 62% / 0.5), transparent 55%),
+                radial-gradient(circle at 70% 70%, hsl(262 63% 55% / 0.45), transparent 50%),
+                linear-gradient(135deg, hsl(262 63% 55% / 0.35), hsl(43 92% 62% / 0.35));
+    filter: blur(18px);
+    opacity: 0.6;
+    animation: blob-morph 8s ease-in-out infinite;
+  }
+
+  .morph-blob--secondary {
+    width: 120px;
+    height: 120px;
+    opacity: 0.4;
+    animation-duration: 10s;
+    animation-delay: -2s;
+  }
+
+  @keyframes blob-morph {
+    0% {
+      transform: translateY(0) scale(1) rotate(0deg);
+      border-radius: 46% 54% 52% 48% / 60% 38% 62% 40%;
+    }
+    33% {
+      transform: translateY(-8px) scale(1.05) rotate(3deg);
+      border-radius: 40% 60% 55% 45% / 55% 45% 55% 45%;
+    }
+    66% {
+      transform: translateY(6px) scale(0.98) rotate(-2deg);
+      border-radius: 52% 48% 44% 56% / 48% 56% 44% 56%;
+    }
+    100% {
+      transform: translateY(0) scale(1) rotate(0deg);
+      border-radius: 46% 54% 52% 48% / 60% 38% 62% 40%;
+    }
+  }
+
   /* Float animation */
   @keyframes float {
     0%, 100% {

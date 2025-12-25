@@ -49,13 +49,19 @@ const Hero = () => {
             Durai B
           </h1>
           
-          {/* Single role with transition */}
-          <div className="h-12 md:h-14 mb-8 overflow-hidden relative flex items-center justify-center">
-            <div
-              key={roleIndex}
-              className="inline-flex items-center justify-center px-4 md:px-5 py-2 rounded-full border border-accent/40 bg-gradient-to-r from-[#120c2c]/80 via-primary/15 to-accent/20 text-sm md:text-base font-semibold text-accent shadow-[0_0_20px_rgba(255,199,94,0.15)] role-fade"
-            >
-              {roles[roleIndex]}
+          {/* Single role with morphing backdrop and transition */}
+          <div className="h-12 md:h-14 mb-10 overflow-hidden relative flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="morph-blob" aria-hidden />
+              <div className="morph-blob morph-blob--secondary" aria-hidden />
+            </div>
+            <div className="relative">
+              <div
+                key={roleIndex}
+                className="inline-flex items-center justify-center px-4 md:px-5 py-2 rounded-full border border-accent/40 bg-gradient-to-r from-[#120c2c]/80 via-primary/15 to-accent/20 text-sm md:text-base font-semibold text-accent shadow-[0_0_20px_rgba(255,199,94,0.18)] role-fade"
+              >
+                {roles[roleIndex]}
+              </div>
             </div>
           </div>
           
