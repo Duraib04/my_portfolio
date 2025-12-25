@@ -40,11 +40,11 @@ const Hero = () => {
           </h1>
           
           {/* Role ticker */}
-          <div className="h-12 md:h-14 mb-6 overflow-hidden relative flex items-center justify-center">
-            <div className="absolute inset-0 role-ticker flex flex-col">
+          <div className="h-12 md:h-14 mb-8 overflow-hidden relative flex items-center justify-center">
+            <div className="absolute inset-0 role-ticker flex items-center gap-3">
               {[...roles, ...roles].map((role, idx) => (
-                <div key={`${role}-${idx}`} className="h-12 md:h-14 flex items-center justify-center">
-                  <span className="px-4 py-2 rounded-full glass-card border-primary/30 text-sm md:text-base font-semibold text-primary bg-gradient-to-r from-primary/15 via-accent/10 to-primary/15">
+                <div key={`${role}-${idx}`} className="flex items-center justify-center">
+                  <span className="px-4 md:px-5 py-2 rounded-full border border-accent/40 bg-gradient-to-r from-[#120c2c]/80 via-primary/15 to-accent/20 text-sm md:text-base font-semibold text-accent shadow-[0_0_20px_rgba(255,199,94,0.15)]">
                     {role}
                   </span>
                 </div>

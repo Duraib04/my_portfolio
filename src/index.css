@@ -182,17 +182,18 @@
     animation-delay: 2000ms;
   }
 
-  /* Vertical role ticker for hero */
+  /* Horizontal role ticker for hero */
   .role-ticker {
-    animation: role-ticker 12s linear infinite;
+    animation: role-ticker 14s linear infinite;
+    width: max-content;
   }
 
   @keyframes role-ticker {
     0% {
-      transform: translateY(0);
+      transform: translateX(0);
     }
     100% {
-      transform: translateY(-50%);
+      transform: translateX(-50%);
     }
   }
 
