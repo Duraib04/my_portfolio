@@ -27,7 +27,7 @@ const SkillsPage = () => {
   return (
     <div className="min-h-screen">
       <Navigation activePage={activePage} onPageChange={handlePageChange} />
-      <main>
+      <main className="page-fade">
         <Skills />
       </main>
       <FloatingChatWidget />

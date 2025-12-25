@@ -247,6 +247,22 @@
     }
   }
 
+  /* Page fade/slide entrance for smoother transitions */
+  .page-fade {
+    animation: page-fade 0.7s ease both;
+  }
+
+  @keyframes page-fade {
+    from {
+      opacity: 0;
+      transform: translateY(12px) scale(0.995);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
   /* Float animation */
   @keyframes float {
     0%, 100% {
