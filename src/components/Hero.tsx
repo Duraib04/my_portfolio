@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail, Download } from "lucide-react";
 
@@ -9,6 +10,15 @@ const Hero = () => {
     "Cloud Developer ☁️",
     "Problem Solver 🎯"
   ];
+
+  const [roleIndex, setRoleIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+    }, 2400);
+    return () => clearInterval(interval);
+  }, [roles.length]);
   
   return (
     <section className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
@@ -39,16 +49,13 @@ const Hero = () => {
             Durai B
           </h1>
           
-          {/* Role ticker */}
+          {/* Single role with transition */}
           <div className="h-12 md:h-14 mb-8 overflow-hidden relative flex items-center justify-center">
-            <div className="absolute inset-0 role-ticker flex items-center gap-3">
-              {[...roles, ...roles].map((role, idx) => (
-                <div key={`${role}-${idx}`} className="flex items-center justify-center">
-                  <span className="px-4 md:px-5 py-2 rounded-full border border-accent/40 bg-gradient-to-r from-[#120c2c]/80 via-primary/15 to-accent/20 text-sm md:text-base font-semibold text-accent shadow-[0_0_20px_rgba(255,199,94,0.15)]">
-                    {role}
-                  </span>
-                </div>
-              ))}
+            <div
+              key={roleIndex}
+              className="inline-flex items-center justify-center px-4 md:px-5 py-2 rounded-full border border-accent/40 bg-gradient-to-r from-[#120c2c]/80 via-primary/15 to-accent/20 text-sm md:text-base font-semibold text-accent shadow-[0_0_20px_rgba(255,199,94,0.15)] role-fade"
+            >
+              {roles[roleIndex]}
             </div>
           </div>
           

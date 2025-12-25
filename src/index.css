@@ -182,18 +182,27 @@
     animation-delay: 2000ms;
   }
 
-  /* Horizontal role ticker for hero */
-  .role-ticker {
-    animation: role-ticker 14s linear infinite;
-    width: max-content;
+  /* Single role fade/slide animation */
+  .role-fade {
+    animation: role-fade 2.4s ease-in-out;
   }
 
-  @keyframes role-ticker {
+  @keyframes role-fade {
     0% {
-      transform: translateX(0);
+      opacity: 0;
+      transform: translateY(16%);
+    }
+    15% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    85% {
+      opacity: 1;
+      transform: translateY(0);
     }
     100% {
-      transform: translateX(-50%);
+      opacity: 0;
+      transform: translateY(-16%);
     }
   }
 
