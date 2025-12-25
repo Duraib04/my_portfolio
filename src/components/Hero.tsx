@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail, Download } from "lucide-react";
-import { useState, useEffect } from "react";
 
 const Hero = () => {
   const roles = [
@@ -11,15 +10,6 @@ const Hero = () => {
     "Problem Solver 🎯"
   ];
   
-  const [currentRole, setCurrentRole] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentRole((prev) => (prev + 1) % roles.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <section className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
       {/* Background elements */}
@@ -49,13 +39,17 @@ const Hero = () => {
             Durai B
           </h1>
           
-          {/* Role text */}
-          <div className="h-16 mb-2">
-            <p className="text-xl md:text-2xl text-muted-foreground">
-              <span className="inline-block" key={currentRole}>
-                {roles[currentRole]}
-              </span>
-            </p>
+          {/* Role ticker */}
+          <div className="h-12 md:h-14 mb-6 overflow-hidden relative flex items-center justify-center">
+            <div className="absolute inset-0 role-ticker flex flex-col">
+              {[...roles, ...roles].map((role, idx) => (
+                <div key={`${role}-${idx}`} className="h-12 md:h-14 flex items-center justify-center">
+                  <span className="px-4 py-2 rounded-full glass-card border-primary/30 text-sm md:text-base font-semibold text-primary bg-gradient-to-r from-primary/15 via-accent/10 to-primary/15">
+                    {role}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
           
           <p className="text-lg text-muted-foreground mb-8">
